@@ -1,0 +1,4 @@
+docme
+=====
+
+A documentation generator
