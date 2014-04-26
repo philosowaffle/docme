@@ -2,7 +2,7 @@
     +[title]: myFunction
     +[description]: a basic javascript function
     +[input]: {
-            -[var]: firstVar-> the first var we take,
+            -[var]: firstVar-> the first var we take
             -[var]: secondVar-> the second var we take
     }
     +[output]: returns a dinosaur
@@ -11,14 +11,14 @@
                   <script>
                       var example = myfunction(firstVar, secondVar);
                   </script>
-                  
+
             }
     }
     +[dependencies]: {
             -[dependson]: jquery
     }
     +[compatability]: {
-            -[compat]: chrome,
+            -[compat]: chrome
             -[compat]: firefox
     }
 
