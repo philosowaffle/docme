@@ -18,6 +18,7 @@ This will generate an index.html file in the current directory.  Open it in any 
 
 Alternatively you can install the gem from [RubyGem](https://rubygems.org/gems/docme)
 
-`>gem install docme`
+    >gem install docme
+    >docme <path/to/file>
 
 
