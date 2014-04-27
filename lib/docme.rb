@@ -1,13 +1,13 @@
 # docme
 
 require 'docme/utils'
+require 'erb'
 
 class Docme
 
     def self.jsParse(file)
-        #file = ARGV[0]
 
-
+        #SETUP
         #raise exception if no file provided, file does not exsist, the file is not readable, or the file has no content
         if file== nil || !File.file?(file) || !File.exists?(file)
             raise "Please provide a path to the file you wish to docme."
@@ -23,25 +23,34 @@ class Docme
 
         puts "Woohoo! docme has a home!"
 
+
         #GLOBALS
         sourceFile = File.open(file).read
         docmeDir = "docme"
+        items = Hash.new
+        collective = Array.new
+        block_content = Hash.new
+        block_attr = nil
         block_flag = 0
         code_flag = 0
+        code = ""
 
+
+        #PARSING
         sourceFile.each_line do |line|
             #strip leading whitespaces
             line = line.lstrip
 
             #if this is the begining of a comment block then start a new function doc
             if line.rindex("/*", 1) == 0
-                #logic to add a new function section to the erb file
                 next
             end
 
             #if this is the end of a comment block then there is nothing to do
             if line.rindex("*/", 1) == 0
                 #end the function section of the erb file
+                collective.push(items)
+                items = Hash.new
                 next
             end
 
@@ -51,7 +60,6 @@ class Docme
 
                 #parts[0] == the attribute name
                 attribute = cleanAttribute(parts[0])
-                #add the attribute to the doc
 
                 content = parts[1].lstrip
 
@@ -61,10 +69,12 @@ class Docme
                     #add the attribute to the doc
                     puts attribute
                     block_flag = 1
+                    block_attr = attribute
                     next
                 end
 
                 #add content to the doc
+                items.store(attribute, content)
                 puts attribute
                 puts content
             end
@@ -75,7 +85,6 @@ class Docme
 
                 #parts[0] == the attribute name
                 attribute = cleanAttribute(parts[0])
-                #add the attribute to the doc
 
                  content = parts[1].lstrip
 
@@ -89,6 +98,7 @@ class Docme
                     #put the var_description in the doc
                     puts var_name
                     puts var_description
+                    block_content.store(var_name, var_description)
                     next
                 end
 
@@ -103,11 +113,15 @@ class Docme
                 #put the content
                 puts attribute
                 puts content
+                block_content.store(attribute, content)
                 next
             end
 
             #if code flag is set and we reached the end of a block, then we reached the end of a code block, unset the flag
             if code_flag == 1 && line.rindex("}",0) == 0
+                items.store(block_attr, code)
+                block_attr = nil
+                code = ""
                 code_flag = 0
                 next
             end
@@ -115,25 +129,23 @@ class Docme
             #if the block flag is set and we reach the end of a block, then we reached the end of a regular block, unset flag
             if block_flag == 1 && line.rindex("}",0) == 0
                 block_flag = 0
+                items.store(block_attr, block_content)
+                block_attr = nil
+                block_content = Hash.new
+                next
             end
 
             #if we are in a code block, then return lines as is
             if code_flag == 1
                 puts line
+                code.concat(line)
                 next
             end
 
 
         end
 
-        def render()
-            ERB.new(@template).result(binding)
-        end
+        renderSite(collective)
 
-        def save(site)
-            FIle.open(site, "w+") do |f|
-                f.write(render)
-            end
-        end
     end
 end
