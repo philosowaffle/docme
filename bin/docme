@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'docme'
+puts Docme.jsParse(ARGV[0])
