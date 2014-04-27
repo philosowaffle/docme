@@ -6,10 +6,18 @@ A documentation generator
 
 ###Usage
 
-Provide a file from the command line (see the `/test` folder for syntax examples).
+Provide a file from the command line (see the `/test` folder for syntax examples).  Currently supports any file type that recognizes `/* */` as a comment block.
 
-`ruby docme.rb <path_to_file>`
+Checkout project from github. Run the following commands
 
-`ruby docme.rb test/testJS.js`
+    >gem build docme.gemspec
+    >gem install docme-0.0.1.gem
+    >docme test/testJS.js
 
-Currently just parses and splits the file based on the initial syntax designs and prints the output to the console.
+This will generate an index.html file in the current directory.  Open it in any browser to see the site documentation.
+
+Alternatively you can install the gem from [RubyGem](https://rubygems.org/gems/docme)
+
+`>gem install docme`
+
+
