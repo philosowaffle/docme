@@ -6,13 +6,11 @@
             -[var]: secondVar-> the second var we take
     }
     +[output]: returns a dinosaur
-    +[example]: {
-            -[code]: {
+    +[code]: {
                   <script>
                       var example = myfunction(firstVar, secondVar);
                   </script>
 
-            }
     }
     +[dependencies]: {
             -[dependson]: jquery
