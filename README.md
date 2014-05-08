@@ -3,6 +3,8 @@ docme
 
 A documentation generator
 
+[![Gem Version](https://badge.fury.io/rb/docme.svg)](http://badge.fury.io/rb/docme)
+
 
 ###Usage
 
