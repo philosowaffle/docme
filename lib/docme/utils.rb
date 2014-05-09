@@ -1,37 +1,6 @@
 #docme utils
 
-template = '<!DOCTYPE html>
-<html>
 
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
-
-
-    <body>
-
-        <% for borg in collective %>
-            <div class="panel panel-default">
-                <% for attribute in borg %>
-                    <% if attribute[0] == "title" %>
-                        <div class="panel-heading">
-                                <h3 class="panel-title"><% attribute[1] %></h3>
-                          </div>
-                    <% end %>
-                      <div class="panel-body">
-                            Panel Content
-                      </div>
-            </div>
-
-            <% end %>
-        <% end %>
-
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    </body>
-
-</html>'
 
 def cleanAttribute(attr)
     attr = attr.delete("+[")
