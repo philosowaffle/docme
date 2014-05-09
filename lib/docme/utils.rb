@@ -9,6 +9,12 @@ def cleanAttribute(attr)
     return attr
 end
 
+def cleanCode(line)
+    line.gsub!("<", "&lt;")
+    line.gsub(">", "&gt;")
+    return line
+end
+
 def renderSite(file, content)
 
     @collective = content

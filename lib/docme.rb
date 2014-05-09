@@ -93,6 +93,7 @@ class Docme
             end
 
             if block_flag == 1 && line.rindex("}",0) != 0
+                line = cleanCode(line)
                 multi_line.concat(line)
                 next
             end
