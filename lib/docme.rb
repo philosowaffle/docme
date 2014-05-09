@@ -32,8 +32,7 @@ class Docme
         block_content = Hash.new
         block_attr = nil
         block_flag = 0
-        code_flag = 0
-        code = ""
+        multi_line = ""
 
 
         #PARSING
@@ -63,11 +62,10 @@ class Docme
 
                 content = parts[1].lstrip
 
-                #if the content begins with '{' then we have a block
+                #if the content begins with '{' then we have a regular block
                 if content.rindex("{",0) == 0
                     #go to the next line and look for '-', set block flag
                     #add the attribute to the doc
-                    puts attribute
                     block_flag = 1
                     block_attr = attribute
                     next
@@ -75,11 +73,10 @@ class Docme
 
                 #add content to the doc
                 items.store(attribute, content)
-                puts attribute
-                puts content
+                next
             end
 
-            #if line begins with a '-' then we are in a block
+            #if line begins with a '-' then we are in a block, if  we are in a block but there are no sub attributes then do a multi-line
             if line.rindex("-",0) == 0
                 parts = line.split(":")
 
@@ -88,64 +85,39 @@ class Docme
 
                  content = parts[1].lstrip
 
-                if attribute == "var"
-                    # look for arrow
-                    content_parts = content.split("->")
-                    var_name = content_parts[0]
-                    var_description = content_parts[1].lstrip
-
-                    #put the var_name in the doc
-                    #put the var_description in the doc
-                    puts var_name
-                    puts var_description
-                    block_content.store(var_name, var_description)
-                    next
-                end
-
-                if attribute == "code"
-                    code_flag = 1
-                    #go ahead and skip to next line and process code
-                    next
-                end
-
                 #if !var and !code, then process as regular attributes
                 #put the attribute name
                 #put the content
-                puts attribute
-                puts content
                 block_content.store(attribute, content)
                 next
             end
 
-            #if code flag is set and we reached the end of a block, then we reached the end of a code block, unset the flag
-            if code_flag == 1 && line.rindex("}",0) == 0
-                items.store(block_attr, code)
-                block_attr = nil
-                code = ""
-                code_flag = 0
+            if block_flag == 1 && line.rindex("}",0) != 0
+                multi_line.concat(line)
                 next
             end
 
             #if the block flag is set and we reach the end of a block, then we reached the end of a regular block, unset flag
             if block_flag == 1 && line.rindex("}",0) == 0
                 block_flag = 0
-                items.store(block_attr, block_content)
+
+                if multi_line.length > 0
+                    puts multi_line
+                    items.store(block_attr, multi_line)
+                else
+                    items.store(block_attr, block_content)
+                end
+
+                multi_line = ""
                 block_attr = nil
                 block_content = Hash.new
                 next
             end
 
-            #if we are in a code block, then return lines as is
-            if code_flag == 1
-                puts line
-                code.concat(line)
-                next
-            end
-
-
         end
 
-        renderSite(collective)
+        #RENDER SITE
+        renderSite(file,collective)
 
     end
 end

@@ -40,9 +40,10 @@ def cleanAttribute(attr)
     return attr
 end
 
-def renderSite(content)
+def renderSite(file, content)
 
     @collective = content
+    @filename = file
 
     puts content
 
@@ -51,6 +52,10 @@ def renderSite(content)
 
                         <head>
                             <meta name="viewport" content="width=device-width, initial-scale=1">
+
+                            <style type="text/css">
+                                body{ padding-top:70px;}
+                            </style>
                         </head>
 
                         <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -67,7 +72,13 @@ def renderSite(content)
                                               </div>
                                               <div class="panel-body">
                                         <% end %>
-                                        <% if @attribute[0] != "title"%>
+                                        <% if @attribute[0] == "code" %>
+                                                <h4>Code</h4>
+                                                <div class ="well">
+                                                    <pre><code><%= @attribute[1] %></code></pre>
+                                                </div>
+                                        <% end %>
+                                        <% if @attribute[0] != "title" && @attribute[0] != "code"%>
                                             <% if @attribute[1].class == Hash %>
                                                 <h4><%= @attribute[0] %></h4>
                                                 <table class="table">
@@ -79,13 +90,7 @@ def renderSite(content)
                                                     <% end %>
                                                 </table>
                                             <% end %>
-                                            <% if @attribute[0] == "example" %>
-                                                <h4><%= @attribute[0] %></h4>
-                                                <div class ="well">
-                                                    <pre><code><%= @attribute[1] %></code></pre>
-                                                </div>
-                                            <% end %>
-                                            <% if @attribute[0] != "example" && @attribute[0] != "title" && @attribute[1].class != Hash%>
+                                            <% if @attribute[0] != "code" && @attribute[0] != "title" && @attribute[1].class != Hash%>
                                                 <h4><%= @attribute[0]%></h4>
                                                 <p><%= @attribute[1] %></p>
                                             <% end %>

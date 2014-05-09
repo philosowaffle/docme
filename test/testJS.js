@@ -2,17 +2,18 @@
     +[title]: myFunction
     +[description]: a basic javascript function
     +[input]: {
-            -[var]: firstVar-> the first var we take
-            -[var]: secondVar-> the second var we take
+            -[firstVar]: the first var we take
+            -[secondVar]: the second var we take
     }
     +[output]: returns a dinosaur
-    +[example]: {
-            -[code]: {
-                  <script>
-                      var example = myfunction(firstVar, secondVar);
-                  </script>
-
-            }
+    +[code]: {
+          <script>
+              var example = myfunction(firstVar, secondVar);
+          </script>
+    }
+    +[stuff]: {
+        testing some multi-line
+        output
     }
     +[dependencies]: {
             -[dependson]: jquery
@@ -33,15 +34,12 @@ function myFunction(firstVar, secondVar){
     +[title]: mySecondFunction
     +[description]: a basic javascript function
     +[input]: {
-            -[var]: firstVar-> the first var we take
-            -[var]: secondVar-> the second var we take
+            -[firstVar]: the first var we take
+            -[secondVar]: the second var we take
     }
     +[output]: returns a dinosaur
-    +[example]: {
-            -[code]: {
-                      var example = myfunction(firstVar, secondVar);
-
-            }
+    +[code]: {
+            var example = myfunction(firstVar, secondVar);
     }
     +[dependencies]: {
             -[dependson]: jquery
@@ -56,3 +54,35 @@ function myFunction(firstVar, secondVar){
 function myFunction(firstVar, secondVar){
   return "a dinosaur";
 }
+
+
+function myFunction(firstVar, secondVar){
+  return "a dinosaur";
+}
+
+
+/*
+    +[title]: magic!
+    +[description]: a basic javascript function
+    +[input]: {
+            -[firstVar]: the first var we take
+            -[secondVar]: the second var we take
+    }
+    +[output]: returns a dinosaur
+     +[code]: {
+            var example = myfunction(firstVar, secondVar);
+    }
+    +[dependencies]: {
+            -[dependson]: jquery
+    }
+    +[compatability]: {
+            -[compat]: chrome
+            -[compat]: firefox
+    }
+
+*/
+
+function myFunction(firstVar, secondVar){
+  return "a dinosaur";
+}
+
