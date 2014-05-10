@@ -11,27 +11,7 @@ end
 
 def cleanCode(line)
     line.gsub!("<", "&lt;")
-    line.gsub(">", "&gt;")
-
-    numTabs = line.scan("/\t/").length
-
-    if numTabs > 4
-        #remove abs(4-numTabs) tabs
-        numToRemove = 4 - numTabs
-        numToRemove = numToRemove.abs
-
-        line = line[numToRemove..-1]
-    end
-
-    numSpaces = line.count(" ") - line.lstrip.count(" ")
-
-    if numSpaces > 16
-        #remove abs(16-numSpaces) spaces
-        numToRemove = 16 - numSpaces
-        numToRemove = numToRemove.abs
-
-        line = line[numToRemove..-1]
-    end
+    line.gsub!(">", "&gt;")
 
     return line
 end
@@ -69,6 +49,28 @@ def renderSite(file, content)
                                 float: left;
                                 padding-left: 10px;
                              }
+                             pre-scrollable{
+                                overflow-x: scroll;
+                                white-space: nowrap;
+                             }
+
+                             p.code{
+                                border:1px solid #000000;
+                                overflow-x:scroll;
+                                white-space: pre;
+                                font-family:monospace,monospace;
+                                font-size:1em;
+                                background-color:#f5f5f5;
+                                padding:2em;
+                            }
+
+                            pre{
+                                    overflow-wrap: normal;
+                                    white-space: nowrap;
+                                    page-break-inside: auto;
+                                    word-break: normal;
+                                    word-wrap: normal;
+                                }
                             </style>
                         </head>
 
@@ -99,10 +101,8 @@ def renderSite(file, content)
                                                   <div class="panel-body">
                                             <% end %>
                                             <% if @attribute[0] == "CODE" %>
-                                                    <h4>Code</h4>
-                                                    <div class ="well">
-                                                        <pre><code><%= @attribute[1] %></code></pre>
-                                                    </div>
+                                                    <h4>CODE</h4>
+                                                        <p class="code"><%= @attribute[1] %></p>
                                             <% end %>
                                             <% if @attribute[0] != "TITLE" && @attribute[0] != "CODE" %>
                                                 <% if @attribute[1].class == Hash %>

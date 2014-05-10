@@ -65,7 +65,7 @@ class Docme
                 content = cleanContent(parts[1])
 
                 #if the content begins with '{' then we have a regular block
-                if content.rindex("{",0) == 0
+                if content.rindex("{{",0) == 0
                     #go to the next line and look for '-', set block flag
                     #add the attribute to the doc
                     block_flag = 1
@@ -95,14 +95,14 @@ class Docme
                 next
             end
 
-            if block_flag == 1 && stripLine.rindex("}",0) != 0
+            if block_flag == 1 && stripLine.rindex("}}",0) != 0
                 line = cleanCode(line)
                 multi_line.concat(line)
                 next
             end
 
             #if the block flag is set and we reach the end of a block, then we reached the end of a regular block, unset flag
-            if block_flag == 1 && stripLine.rindex("}",0) == 0
+            if block_flag == 1 && stripLine.rindex("}}",0) == 0
                 block_flag = 0
 
                 if multi_line.length > 0
