@@ -154,7 +154,7 @@ def renderSite(file, content)
                                                             <% for @item in @attribute[1]%>
                                                                 <tr>
                                                                     <th><%= @item[0] %></th>
-                                                                    <td><a href="#<%= @item[1] %>"><%= @item[1] %></a></td>
+                                                                    <td><a href="<%= @item[1] %>"><%= @item[1] %></a></td>
                                                                 </tr>
                                                             <% end %>
                                                         </table>

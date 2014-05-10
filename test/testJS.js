@@ -46,8 +46,8 @@
             -[compat]: firefox
     }}
     +[anchor]:{{
-        -[SecondFuntion]: mySecondFunction
-        -[ThirdFunction]: magic!
+        -[SecondFuntion]: #mySecondFunction
+        -[ThirdFunction]: #magic!
     }}
 
 */
