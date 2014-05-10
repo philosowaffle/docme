@@ -59,6 +59,7 @@ class Docme
 
                 #parts[0] == the attribute name
                 attribute = cleanAttribute(parts[0])
+                attribute = attribute.upcase
 
                 content = parts[1].lstrip
 
@@ -82,6 +83,7 @@ class Docme
 
                 #parts[0] == the attribute name
                 attribute = cleanAttribute(parts[0])
+                attribute = attribute.upcase
 
                  content = parts[1].lstrip
 

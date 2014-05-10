@@ -18,7 +18,7 @@ end
 def renderSite(file, content)
 
     @collective = content
-    @filename = file
+    @filename = File.basename(file)
 
     puts content
 
@@ -29,7 +29,20 @@ def renderSite(file, content)
                             <meta name="viewport" content="width=device-width, initial-scale=1">
 
                             <style type="text/css">
-                                body{ padding-top:70px;}
+                                body{
+                                    padding-top:70px;
+                                }
+                                #panels-wrapper{
+                                    width: 70%;
+                                    float: left;
+                                    padding-left: 20%;
+                                }
+                                #side-panel{
+                                width: 10%;
+                                height: 100%;
+                                float: left;
+                                padding-left: 10px;
+                             }
                             </style>
                         </head>
 
@@ -37,43 +50,56 @@ def renderSite(file, content)
 
 
                         <body>
-
-                            <% for @borg in @collective %>
-                                <div class="panel panel-primary">
-                                    <% for @attribute in @borg %>
-                                        <% if @attribute[0] == "title" %>
-                                            <div class="panel-heading">
-                                                    <h2 class="panel-title"><%= @attribute[1] %></h2>
-                                              </div>
-                                              <div class="panel-body">
-                                        <% end %>
-                                        <% if @attribute[0] == "code" %>
-                                                <h4>Code</h4>
-                                                <div class ="well">
-                                                    <pre><code><%= @attribute[1] %></code></pre>
-                                                </div>
-                                        <% end %>
-                                        <% if @attribute[0] != "title" && @attribute[0] != "code"%>
-                                            <% if @attribute[1].class == Hash %>
-                                                <h4><%= @attribute[0] %></h4>
-                                                <table class="table">
-                                                    <% for @item in @attribute[1]%>
-                                                        <tr>
-                                                            <th><%= @item[0] %></th>
-                                                            <td><%= @item[1] %></td>
-                                                        </tr>
-                                                    <% end %>
-                                                </table>
-                                            <% end %>
-                                            <% if @attribute[0] != "code" && @attribute[0] != "title" && @attribute[1].class != Hash%>
-                                                <h4><%= @attribute[0]%></h4>
-                                                <p><%= @attribute[1] %></p>
-                                            <% end %>
-                                        <%  end %>
-                                    <% end %>
-                                    </div>
+                            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                              <div class="container">
+                                <div class="collapse navbar-collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li><a class="navbar-brand" href="#"><%= @filename%></a></li>
+                                    </ul>
                                 </div>
-                            <% end %>
+                              </div>
+                            </nav>
+                            <div id="side-panel" class="panel panel-default">
+                                <a href="#">- <%= @filename %></a>
+                            </div>
+                            <div id="panels-wrapper">
+                                <% for @borg in @collective %>
+                                    <div class="panel panel-primary">
+                                        <% for @attribute in @borg %>
+                                            <% if @attribute[0] == "TITLE" %>
+                                                <div class="panel-heading">
+                                                        <h2 class="panel-title"><%= @attribute[1] %></h2>
+                                                  </div>
+                                                  <div class="panel-body">
+                                            <% end %>
+                                            <% if @attribute[0] == "CODE" %>
+                                                    <h4>Code</h4>
+                                                    <div class ="well">
+                                                        <pre><code><%= @attribute[1] %></code></pre>
+                                                    </div>
+                                            <% end %>
+                                            <% if @attribute[0] != "TITLE" && @attribute[0] != "CODE" %>
+                                                <% if @attribute[1].class == Hash %>
+                                                    <h4><%= @attribute[0] %></h4>
+                                                    <table class="table">
+                                                        <% for @item in @attribute[1]%>
+                                                            <tr>
+                                                                <th><%= @item[0] %></th>
+                                                                <td><%= @item[1] %></td>
+                                                            </tr>
+                                                        <% end %>
+                                                    </table>
+                                                <% end %>
+                                                <% if @attribute[0] != "CODE" && @attribute[0] != "TITLE" && @attribute[1].class != Hash%>
+                                                    <h4><%= @attribute[0]%></h4>
+                                                    <p><%= @attribute[1] %></p>
+                                                <% end %>
+                                            <%  end %>
+                                        <% end %>
+                                        </div>
+                                    </div>
+                                <% end %>
+                                </div>
 
                             <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
                         </body>
