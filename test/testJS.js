@@ -115,3 +115,9 @@ function myMagicFunction(firstVar, secondVar){
   return "a small dinosaur";
 }
 
+
+/*
+
+        testing a non-docme clode block. this should not be parsed.
+
+*/

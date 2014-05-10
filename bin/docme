@@ -25,13 +25,15 @@ if File.directory?(path)
 
         next if file.rindex('.', 0)
 
+        #if there is a sub directory
         if File.directory?(path+"/"+file)
+            #for each file in the sub directory
             Dir.foreach(path + "/"+ file) do |f|
                 next if f == '.' || f == '..'
 
                 next if f.rindex('.', 0)
 
-                next if File.directory?(path+"/"+f)
+                next if File.directory?(path+"/"+file+"/"+f)
 
                 page = Docme.jsParse(path+"/"+file+"/"+f)
 

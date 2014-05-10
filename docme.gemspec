@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
     s.name = 'docme'
-    s.version = '1.0.1'
+    s.version = '1.0.2'
     s.executables << 'docme'
     s.date = '2014-05-10'
     s.summary = "A documentation site generator."
-    s.description = "A gem to support easy documentation for any file that recognizes `/* */` as a code block.  This gem lets you easily parse multiple files in a directory and generate documentation that can be viewed in the browser.  See the homepage for syntax and examples."
+    s.description = "A gem to support easy documentation for any file that recognizes `/* */` as a code block.  This gem lets you easily parse multiple files in a directory and generate documentation that can be viewed in the browser.  See the homepage and wiki for syntax and examples."
     s.authors = ["Bailey Belvis"]
     s.email = 'baileyb622@gmail.com'
     s.files = ["lib/docme.rb", "lib/docme/utils.rb"]
