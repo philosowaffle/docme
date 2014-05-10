@@ -23,6 +23,7 @@ class Docme
         block_attr = nil
         block_flag = 0
         multi_line = ""
+        isDocme = 0
 
 
         #PARSING
@@ -37,15 +38,18 @@ class Docme
             end
 
             #if this is the end of a comment block then there is nothing to do
-            if stripLine.rindex("*/", 1) == 0
+            if stripLine.rindex("*/", 1) == 0  && isDocme == 1
                 #end the function section of the erb file
                 collective.push(items)
+                isDocme = 0
                 items = Hash.new
                 next
             end
 
             #if line begins with '+' then we are defining an attribute
             if stripLine.rindex("+",0) == 0
+
+                isDocme = 1
                 parts = stripLine.split(":")
 
                 #parts[0] == the attribute name
@@ -69,7 +73,7 @@ class Docme
             end
 
             #if line begins with a '-' then we are in a block, if  we are in a block but there are no sub attributes then do a multi-line
-            if stripLine.rindex("-",0) == 0
+            if stripLine.rindex("-",0) == 0 && isDocme == 1
                 parts = stripLine.split(":")
 
                 #parts[0] == the attribute name
@@ -85,14 +89,14 @@ class Docme
                 next
             end
 
-            if block_flag == 1 && stripLine.rindex("}}",0) != 0
+            if block_flag == 1 && stripLine.rindex("}}",0) != 0 && isDocme == 1
                 line = cleanCode(line)
                 multi_line.concat(line)
                 next
             end
 
             #if the block flag is set and we reach the end of a block, then we reached the end of a regular block, unset flag
-            if block_flag == 1 && stripLine.rindex("}}",0) == 0
+            if block_flag == 1 && stripLine.rindex("}}",0) == 0 && isDocme ==1
                 block_flag = 0
 
                 if multi_line.length > 0
