@@ -12,6 +12,27 @@ end
 def cleanCode(line)
     line.gsub!("<", "&lt;")
     line.gsub(">", "&gt;")
+
+    numTabs = line.scan("/\t/").length
+
+    if numTabs > 4
+        #remove abs(4-numTabs) tabs
+        numToRemove = 4 - numTabs
+        numToRemove = numToRemove.abs
+
+        line = line[numToRemove..-1]
+    end
+
+    numSpaces = line.count(" ") - line.lstrip.count(" ")
+
+    if numSpaces > 16
+        #remove abs(16-numSpaces) spaces
+        numToRemove = 16 - numSpaces
+        numToRemove = numToRemove.abs
+
+        line = line[numToRemove..-1]
+    end
+
     return line
 end
 
