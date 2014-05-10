@@ -17,38 +17,45 @@ if !File::directory?("docme_site")
     puts "Woohoo! docme has a home!"
 end
 
-#foreach file in the path specified
-Dir.foreach(path) do |file|
-    next if file == '.' || file == '..'
+#if a directory was provided
+if File.directory?(path)
+    #foreach file in the path specified
+    Dir.foreach(path) do |file|
+        next if file == '.' || file == '..'
 
-    next if file.rindex('.', 0)
+        next if file.rindex('.', 0)
 
-    if File.directory?(path+"/"+file)
-        Dir.foreach(path + "/"+ file) do |f|
-            next if f == '.' || f == '..'
+        if File.directory?(path+"/"+file)
+            Dir.foreach(path + "/"+ file) do |f|
+                next if f == '.' || f == '..'
 
-            next if f.rindex('.', 0)
+                next if f.rindex('.', 0)
 
-            next if File.directory?(path+"/"+f)
+                next if File.directory?(path+"/"+f)
 
-            page = Docme.jsParse(path+"/"+file+"/"+f)
+                page = Docme.jsParse(path+"/"+file+"/"+f)
 
-            #add page to docme dir
-            if page != nil
-                FileUtils.mv(page, "docme_site/"+page)
-                files.push(page)
+                #add page to docme dir
+                if page != nil
+                    FileUtils.mv(page, "docme_site/"+page)
+                    files.push(page)
+                end
+
             end
+        else
+            page = Docme.jsParse(path+"/"+file)
 
+            if page != nil
+                    FileUtils.mv(page, "docme_site/"+page)
+                    files.push(page)
+            end
         end
-    else
-        page = Docme.jsParse(path+"/"+file)
 
-        if page != nil
-                FileUtils.mv(page, "docme_site/"+page)
-                files.push(page)
-        end
     end
-
+else #if a single file was provided
+    page = Docme.jsParse(path)
+    FileUtils.mv(page, "docme_site/"+page)
+    files.push(page)
 end
 
 renderIndex(files)
