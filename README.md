@@ -22,18 +22,18 @@ Checkout project from github. Run the following commands
 
 OR you can provide an entire directory to docme.  Currently docme can process up to 2 levels of directories i.e
 
-   -home
-   |-- test
-       |
-       |-file.txt
-       |-file.java
-       |-- subTest
-            |
-            |-file.js
-            |-otherfile.txt
-            |-- subsubFolder
+       -home
+       |-- test
+           |
+           |-file.txt
+           |-file.java
+           |-- subTest
                 |
-                |-anotherFile.txt
+                |-file.js
+                |-otherfile.txt
+                |-- subsubFolder
+                    |
+                    |-anotherFile.txt
 
 If you ran the following command from your home directory:
 
