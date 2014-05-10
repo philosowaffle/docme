@@ -22,12 +22,62 @@ def cleanContent(line)
     return line
 end
 
+def cleanFilename(file)
+    file = File.basename(file)
+    file = file.split(".")
+    file = file[0]
+    return file
+end
+
+def renderIndex(pages)
+    #puts pages
+
+    @pages = pages
+
+    template = '<!DOCTYPE html>
+                    <html>
+
+                        <style type="text/css">
+                            #wrapper{
+                                    width: 70%;
+                                    padding-left: 30%;
+                                    font-size:2em;
+                                }
+                        </style>
+
+                        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+                        <body>
+                            <div id="wrapper">
+                                <div class="list-group">
+                                    <% for @page in @pages %>
+
+                                        <% @name = cleanFilename(@page) %>
+                                        <a href="<%= @page %>" class="list-group-item list-group-item-info"><%= @name %></a>
+
+                                    <% end %>
+                                </div>
+                            </div>
+                        </body>
+
+                    </html>'
+
+    renderer = ERB.new(template)
+
+    File.open("index.html", "w+") do |f|
+        f.write(renderer.result(binding))
+    end
+
+    return "index.html"
+
+end
+
 def renderSite(file, content)
 
     @collective = content
-    @filename = File.basename(file)
+    @filename = file
 
-    puts content
+    #puts content
 
     template = '<!DOCTYPE html>
                     <html>
@@ -39,13 +89,12 @@ def renderSite(file, content)
                                 body{
                                 }
                                 #panels-wrapper{
-                                    width: 70%;
+                                    width: 80%;
                                     float: left;
-                                    padding-left: 20%;
+                                    padding-left: 10%;
                                 }
                                 #side-panel{
                                 width: 10%;
-                                height: 100%;
                                 float: left;
                                 padding-left: 10px;
                              }
@@ -64,13 +113,6 @@ def renderSite(file, content)
                                 padding:2em;
                             }
 
-                            pre{
-                                    overflow-wrap: normal;
-                                    white-space: nowrap;
-                                    page-break-inside: auto;
-                                    word-break: normal;
-                                    word-wrap: normal;
-                                }
                             </style>
                         </head>
 
@@ -88,7 +130,7 @@ def renderSite(file, content)
                               </div>
                             </nav>
                             <div id="side-panel" class="panel panel-default">
-                                <a href="#">- <%= @filename %></a>
+                                <a href="index.html" class="list-group-item list-group-item-info">INDEX</a>
                             </div>
                             <div id="panels-wrapper">
                                 <% for @borg in @collective %>
@@ -146,9 +188,13 @@ def renderSite(file, content)
 
     renderer = ERB.new(template)
 
-    File.open("index.html", "w+") do |f|
+    page = @filename + ".html"
+
+    File.open(page, "w+") do |f|
         f.write(renderer.result(binding))
     end
+
+    return page
 
 end
 

@@ -2,6 +2,7 @@
 
 require 'docme/utils'
 require 'erb'
+require 'fileutils'
 
 class Docme
 
@@ -13,20 +14,9 @@ class Docme
             raise "Please provide a path to the file you wish to docme."
         end
 
-        puts "\n  ***Begining docme magix***"
-
-        #create the directory where the site will be stored
-        if !File::directory?("docme_site")
-            puts "+Setting up docme's living arrangements."
-            Dir.mkdir("docme_site")
-        end
-
-        puts "Woohoo! docme has a home!"
-
-
         #GLOBALS
         sourceFile = File.open(file).read
-        docmeDir = "docme"
+        file = cleanFilename(file)
         items = Hash.new
         collective = Array.new
         block_content = Hash.new
@@ -120,7 +110,12 @@ class Docme
         end
 
         #RENDER SITE
-        renderSite(file,collective)
+        if collective.length > 0
+            page = renderSite(file,collective)
+            return page
+        end
+
+        return nil
 
     end
 end
