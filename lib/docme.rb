@@ -61,7 +61,7 @@ class Docme
                 attribute = cleanAttribute(parts[0])
                 attribute = attribute.upcase
 
-                content = parts[1].lstrip
+                content = cleanContent(parts[1])
 
                 #if the content begins with '{' then we have a regular block
                 if content.rindex("{",0) == 0
@@ -105,7 +105,6 @@ class Docme
                 block_flag = 0
 
                 if multi_line.length > 0
-                    puts multi_line
                     items.store(block_attr, multi_line)
                 else
                     items.store(block_attr, block_content)

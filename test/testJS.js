@@ -23,6 +23,10 @@ Praesent at suscipit metus. Nullam sit amet vehicula eros. Donec ac mollis justo
             -[compat]: chrome
             -[compat]: firefox
     }
+    +[anchor]:{
+        -[SecondFuntion]: mySecondFunction
+        -[ThirdFunction]: magic!
+    }
 
 */
 

@@ -15,6 +15,12 @@ def cleanCode(line)
     return line
 end
 
+def cleanContent(line)
+    line = line.lstrip
+    line.chop!
+    return line
+end
+
 def renderSite(file, content)
 
     @collective = content
@@ -30,7 +36,6 @@ def renderSite(file, content)
 
                             <style type="text/css">
                                 body{
-                                    padding-top:70px;
                                 }
                                 #panels-wrapper{
                                     width: 70%;
@@ -50,7 +55,7 @@ def renderSite(file, content)
 
 
                         <body>
-                            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                            <nav class="navbar navbar-default navbar-static-top" role="navigation">
                               <div class="container">
                                 <div class="collapse navbar-collapse">
                                     <ul class="nav navbar-nav">
@@ -67,7 +72,7 @@ def renderSite(file, content)
                                     <div class="panel panel-primary">
                                         <% for @attribute in @borg %>
                                             <% if @attribute[0] == "TITLE" %>
-                                                <div class="panel-heading">
+                                                <div class="panel-heading" id="<%= @attribute[1]%>">
                                                         <h2 class="panel-title"><%= @attribute[1] %></h2>
                                                   </div>
                                                   <div class="panel-body">
@@ -80,15 +85,27 @@ def renderSite(file, content)
                                             <% end %>
                                             <% if @attribute[0] != "TITLE" && @attribute[0] != "CODE" %>
                                                 <% if @attribute[1].class == Hash %>
-                                                    <h4><%= @attribute[0] %></h4>
-                                                    <table class="table">
-                                                        <% for @item in @attribute[1]%>
-                                                            <tr>
-                                                                <th><%= @item[0] %></th>
-                                                                <td><%= @item[1] %></td>
-                                                            </tr>
-                                                        <% end %>
-                                                    </table>
+                                                    <% if @attribute[0] == "ANCHOR" %>
+                                                        <h4><%= @attribute[0] %></h4>
+                                                        <table class="table">
+                                                            <% for @item in @attribute[1]%>
+                                                                <tr>
+                                                                    <th><%= @item[0] %></th>
+                                                                    <td><a href="#<%= @item[1] %>"><%= @item[1] %></a></td>
+                                                                </tr>
+                                                            <% end %>
+                                                        </table>
+                                                    <% else %>
+                                                        <h4><%= @attribute[0] %></h4>
+                                                        <table class="table">
+                                                            <% for @item in @attribute[1]%>
+                                                                <tr>
+                                                                    <th><%= @item[0] %></th>
+                                                                    <td><%= @item[1] %></td>
+                                                                </tr>
+                                                            <% end %>
+                                                        </table>
+                                                    <% end %>
                                                 <% end %>
                                                 <% if @attribute[0] != "CODE" && @attribute[0] != "TITLE" && @attribute[1].class != Hash%>
                                                     <h4><%= @attribute[0]%></h4>
