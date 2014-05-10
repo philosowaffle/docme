@@ -9,6 +9,6 @@ Gem::Specification.new do |s|
     s.email = 'baileyb622@gmail.com'
     s.files = ["lib/docme.rb", "lib/docme/utils.rb"]
     s.homepage = 'https://github.com/philosowaffle/docme'
-    s.license = ['Mozilla Public License']
+    s.license = 'Mozilla Public License'
     s.post_install_message = "Woohoo! You now have docme :) "
 end
