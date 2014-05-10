@@ -43,7 +43,7 @@ Then docme me would parse the `test/` directory and all of the FILES in the `sub
 
 You can also use the current directory
 
-    >docme .
+    >docme ./
 
 This will generate a `docme_site` folder in the current directory.  Inside this folder you will find an `.html` file for each file that docme parsed.  Additionally there will be an `index.html` file that compiles all of the links into one easy landing page.
 
