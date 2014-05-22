@@ -1,36 +1,36 @@
-#docme utils
+# docme utils
 
-
-
-def cleanAttribute(attr)
-    attr = attr.delete("+[")
-    attr = attr.delete("]")
-    attr = attr.delete("-")
-    return attr
+def clean_attribute(attr)
+    attr = attr.delete('+[')
+    attr = attr.delete(']')
+    attr = attr.delete('-')
+    attr
 end
 
-def cleanCode(line)
-    line.gsub!("<", "&lt;")
-    line.gsub!(">", "&gt;")
+def clean_code(line)
+    line.gsub!('<', '&lt;')
+    line.gsub!('>', '&gt;')
 
-    return line
+    line
 end
 
-def cleanContent(line)
+def clean_content(line)
     line = line.lstrip
     line.chop!
-    return line
+
+    line
 end
 
-def cleanFilename(file)
+def clean_filename(file)
     file = File.basename(file)
-    file = file.split(".")
+    file = file.split('.')
     file = file[0]
-    return file
+
+    file
 end
 
-def renderIndex(pages)
-    #puts pages
+def render_index(pages)
+    # puts pages
 
     @pages = pages
 
@@ -52,7 +52,7 @@ def renderIndex(pages)
                                 <div class="list-group">
                                     <% for @page in @pages %>
 
-                                        <% @name = cleanFilename(@page) %>
+                                        <% @name = clean_filename(@page) %>
                                         <a href="<%= @page %>" class="list-group-item list-group-item-info"><%= @name %></a>
 
                                     <% end %>
@@ -64,20 +64,20 @@ def renderIndex(pages)
 
     renderer = ERB.new(template)
 
-    File.open("index.html", "w+") do |f|
+    File.open('index.html', 'w+') do |f|
         f.write(renderer.result(binding))
     end
 
-    return "index.html"
+    'index.html'
 
 end
 
-def renderSite(file, content)
+def render_site(file, content)
 
     @collective = content
     @filename = file
 
-    #puts content
+    # puts content
 
     template = '<!DOCTYPE html>
                     <html>
@@ -188,13 +188,12 @@ def renderSite(file, content)
 
     renderer = ERB.new(template)
 
-    page = @filename + ".html"
+    page = @filename + '.html'
 
-    File.open(page, "w+") do |f|
+    File.open(page, 'w+') do |f|
         f.write(renderer.result(binding))
     end
 
-    return page
+    page
 
 end
-

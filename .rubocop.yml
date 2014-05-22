@@ -1,0 +1,29 @@
+AllCops:
+    Exclude:
+        - test/**/*
+        - coverage/**/*
+        - docme_site/**/*
+        - Rakefile
+        - Gemfile
+        - docme.gemspec
+
+Documentation:
+  Enabled: false
+
+EmptyLinesAroundBody:
+  Enabled: false
+
+IfUnlessModifier:
+  Enabled: false
+
+IndentationWidth:
+  Enabled: false
+
+LineLength:
+  Enabled: false
+
+MethodLength:
+  Enabled: false
+
+CyclomaticComplexity:
+  Max: 19
