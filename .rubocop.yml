@@ -27,3 +27,6 @@ MethodLength:
 
 CyclomaticComplexity:
   Max: 19
+
+Next:
+  Enabled: false
