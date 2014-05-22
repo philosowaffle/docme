@@ -7,6 +7,8 @@ A documentation generator.
 
 [![Build Status](https://travis-ci.org/philosowaffle/docme.svg?branch=master)](https://travis-ci.org/philosowaffle/docme)
 
+[![Coverage Status](https://coveralls.io/repos/philosowaffle/docme/badge.png)](https://coveralls.io/r/philosowaffle/docme)
+
 ###Description
 
 docme serves as a straight forward, quick, and highly customizable documentation generator.  docme syntax is available in any file that recognizes `/* */` as a comment block.  docme utilizes Twitter's Bootstrap to generate html pages that can easily be loaded into a browser for easy reference and sharing.  docme's first goal was to serve as an easy way to generate documentation for javascript files and was inspired by an effort to make documentation easier in the [blucollar](https://github.com/philosowaffle/bluecollar) project .
