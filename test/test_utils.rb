@@ -1,6 +1,9 @@
 require 'test/unit'
 require 'docme'
 require 'docme/utils'
+require 'coveralls'
+
+Coveralls.wear!
 
 class UtilsTest < Test::Unit::TestCase
     def test_clean_attribute
