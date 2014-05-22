@@ -1,11 +1,8 @@
-require 'test/unit'
+require 'minitest/autorun'
 require 'docme'
 require 'docme/utils'
-require 'coveralls'
 
-Coveralls.wear!
-
-class UtilsTest < Test::Unit::TestCase
+class UtilsTest < MiniTest::Unit::TestCase
     def test_clean_attribute
         assert_equal "trex", cleanAttribute("+[trex]")
     end

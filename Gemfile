@@ -1,5 +1,10 @@
 source "https://rubygems.org"
-source "http://gems.github.com"
 
-gem "rake", :group => :test
+gemspec
+
 gem "coveralls", require: false
+
+
+group :test do
+    gem 'rake'
+end
