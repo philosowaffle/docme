@@ -1,0 +1,8 @@
+/*
+
+    +[title]: testing a sub4 directory, should be reached.
+    +[anchor]: {{
+        -[test Deep Directory Anchor]: dirTest.html#dirTest
+    }}
+
+*/

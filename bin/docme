@@ -26,23 +26,9 @@ if File.directory?(path)
 
         # if there is a sub directory
         if File.directory?(path + '/' + file)
-            # for each file in the sub directory
-            Dir.foreach(path + '/' + file) do |f|
-                next if f == '.' || f == '..'
 
-                next if f.rindex('.', 0)
+            files.concat parse_subdirectory(path + '/' + file)
 
-                next if File.directory?(path + '/' + file + '/' + f)
-
-                page = Docme.j_parse(path + '/' + file + '/' + f)
-
-                # add page to docme dir
-                if page
-                    FileUtils.mv(page, 'docme_site/' + page)
-                    files.push(page)
-                end
-
-            end
         else
             page = Docme.j_parse(path + '/' + file)
 

@@ -29,6 +29,38 @@ def clean_filename(file)
     file
 end
 
+def parse_subdirectory(path)
+
+    files_array = []
+
+    # for each file in the sub directory
+    Dir.foreach(path) do |f|
+        next if f == '.' || f == '..'
+
+        next if f.rindex('.', 0)
+
+        # if another directory then go inside
+        if File.directory?(path + '/' + f)
+
+            files_array.concat parse_subdirectory(path + '/' + f)
+
+        else # else parse normally
+
+            page = Docme.j_parse(path + '/' + f)
+
+            # add page to docme dir
+            if page
+                FileUtils.mv(page, 'docme_site/' + page)
+                files_array.push(page)
+            end
+
+        end
+    end
+
+    files_array
+
+end
+
 def render_index(pages)
     # puts pages
 

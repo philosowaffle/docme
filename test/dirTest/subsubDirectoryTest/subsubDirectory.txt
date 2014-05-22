@@ -1,5 +1,5 @@
 /*
 
-    +[title]: testing a sub-sub directory, should not be reached.
+    +[title]: testing a sub-sub directory, should be reached.
 
 */
