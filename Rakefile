@@ -2,7 +2,8 @@ require 'rake/testtask'
 
 Rake::TestTask.new do |t|
   t.libs << 'lib'
-  t.pattern = 'test/**/*test_*.rb'
+  t.libs << 'test'
+  t.pattern = 'test/**/*.rb'
 end
 
 desc "Run tests"

@@ -16,7 +16,7 @@ end
 
 def clean_content(line)
     line = line.lstrip
-    line.chop!
+    line = line.rstrip
 
     line
 end
