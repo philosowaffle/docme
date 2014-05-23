@@ -34,17 +34,39 @@ class UtilsTest < MiniTest::Unit::TestCase
     end
 
     def test_parse_directory_full_path
+        Dir.mkdir('docme_site')
+
         expected = ["dirTest.html", "sub3Directory.html", "sub4Directory.html", "subsubDirectory.html", "test.html", "testJS.html", "testTextFile.html"]
-        actual = parse_directory("test")
+        actual = parse_directory("test/")
 
         assert_equal expected, actual
+
+        File.delete('docme_site/dirTest.html')
+        File.delete('docme_site/sub3Directory.html')
+        File.delete('docme_site/sub4Directory.html')
+        File.delete('docme_site/subsubDirectory.html')
+        File.delete('docme_site/test.html')
+        File.delete('docme_site/testJS.html')
+        File.delete('docme_site/testTextFile.html')
+        Dir.rmdir('docme_site')
     end
 
     def test_parse_directory_default_path
+        Dir.mkdir('docme_site')
+
         expected = ["dirTest.html", "sub3Directory.html", "sub4Directory.html", "subsubDirectory.html", "test.html", "testJS.html", "testTextFile.html"]
         actual = parse_directory("./test")
 
         assert_equal expected, actual
+
+        File.delete('docme_site/dirTest.html')
+        File.delete('docme_site/sub3Directory.html')
+        File.delete('docme_site/sub4Directory.html')
+        File.delete('docme_site/subsubDirectory.html')
+        File.delete('docme_site/test.html')
+        File.delete('docme_site/testJS.html')
+        File.delete('docme_site/testTextFile.html')
+        Dir.rmdir('docme_site')
     end
 
     def test_parse_file
@@ -52,10 +74,13 @@ class UtilsTest < MiniTest::Unit::TestCase
         actual = parse_file("test/testJS.js")
 
         assert_equal expected, actual
+
+        File.delete('testJS.html')
     end
 
     def test_render_index
         pages = ['test.html', 'test2.html', 'test3.html']
+
         expected = 'index.html'
         actual = render_index(pages)
 
