@@ -54,7 +54,7 @@ You can also use the current directory
 
 This will generate a `docme_site` folder in the current directory.  Inside this folder you will find an `.html` file for each file that docme parsed.  Additionally there will be an `index.html` file that compiles all of the links into one easy landing page.
 
-##Compatible with:
+####Compatible with:
 
 * Linux
 * Mac
