@@ -7,7 +7,7 @@ require 'fileutils'
 files = []
 path = ARGV[0]
 
-if ARGV[0] == nil
+if ARGV[0].nil?
     path = './'
 else
     path = ARGV[0]
