@@ -54,6 +54,12 @@ You can also use the current directory
 
 This will generate a `docme_site` folder in the current directory.  Inside this folder you will find an `.html` file for each file that docme parsed.  Additionally there will be an `index.html` file that compiles all of the links into one easy landing page.
 
+##Compatible with:
+
+* Linux
+* Mac
+* Windows
+
 ###Syntax
 
 Syntax is subject to change, especially in the early iterations of this project.  See the syntax for each supported version [here](https://github.com/philosowaffle/docme/wiki).
