@@ -4,6 +4,7 @@ def clean_attribute(attr)
     attr = attr.delete('+[')
     attr = attr.delete(']')
     attr = attr.delete('-')
+    attr = attr.upcase
     attr
 end
 
@@ -29,7 +30,7 @@ def clean_filename(file)
     file
 end
 
-def parse_subdirectory(path)
+def parse_directory(path)
 
     files_array = []
 
@@ -42,22 +43,29 @@ def parse_subdirectory(path)
         # if another directory then go inside
         if File.directory?(path + '/' + f)
 
-            files_array.concat parse_subdirectory(path + '/' + f)
+            files_array.concat parse_directory(path + '/' + f)
 
         else # else parse normally
 
-            page = Docme.j_parse(path + '/' + f)
+            temp_page = parse_file(path + '/' + f)
 
-            # add page to docme dir
-            if page
-                FileUtils.mv(page, 'docme_site/' + page)
-                files_array.push(page)
+            if temp_page
+                files_array.push(temp_page)
+                FileUtils.mv(temp_page, 'docme_site/' + temp_page)
             end
 
         end
     end
 
     files_array
+
+end
+
+def parse_file(path)
+
+    page = Docme.j_parse(path)
+
+    page
 
 end
 

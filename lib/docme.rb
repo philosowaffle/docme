@@ -8,12 +8,6 @@ class Docme
 
     def self.j_parse(file)
 
-        # SETUP
-        # raise exception if no file provided, file does not exsist, the file is not readable, or the file has no content
-        if file.nil? || !File.file?(file) || !File.exist?(file)
-            fail 'Please provide a path to the file you wish to docme.'
-        end
-
         # GLOBALS
         source_file = File.open(file).read
         file = clean_filename(file)
@@ -52,7 +46,6 @@ class Docme
 
                 # parts[0] == the attribute name
                 attribute = clean_attribute(parts[0])
-                attribute = attribute.upcase
 
                 content = clean_content(parts[1])
 
@@ -76,7 +69,6 @@ class Docme
 
                 # parts[0] == the attribute name
                 attribute = clean_attribute(parts[0])
-                attribute = attribute.upcase
 
                 content = clean_content(parts[1])
 
@@ -105,13 +97,14 @@ class Docme
 
                 multi_line = ''
                 block_attr = nil
-                block_content = Hash.new
+                block_content = {}
                 next
             end
 
         end
 
         # RENDER SITE
+        # TODO: pull this out a level so we can have an index on each page aswell
         if collective.length > 0
             page = render_site(file, collective)
             return page

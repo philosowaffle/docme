@@ -7,6 +7,12 @@ require 'fileutils'
 files = []
 path = ARGV[0]
 
+if ARGV[0] == nil
+    path = './'
+else
+    path = ARGV[0]
+end
+
 puts "\n  ***Begining docme magix***"
 
 # create the directory where the site will be stored
@@ -18,31 +24,18 @@ end
 
 # if a directory was provided
 if File.directory?(path)
-    # foreach file in the path specified
-    Dir.foreach(path) do |file|
-        next if file == '.' || file == '..'
 
-        next if file.rindex('.', 0)
+    files.concat parse_directory(path)
 
-        # if there is a sub directory
-        if File.directory?(path + '/' + file)
-
-            files.concat parse_subdirectory(path + '/' + file)
-
-        else
-            page = Docme.j_parse(path + '/' + file)
-
-            if page
-                    FileUtils.mv(page, 'docme_site/' + page)
-                    files.push(page)
-            end
-        end
-
-    end
 else # if a single file was provided
-    page = Docme.j_parse(path)
-    FileUtils.mv(page, 'docme_site/' + page)
-    files.push(page)
+
+    # raise exception if no file provided, file does not exsist, the file is not readable, or the file has no content
+    if !File.file?(path) || !File.exist?(path)
+        fail 'Please provide a path to the file you wish to docme.'
+    end
+
+    files.push(parse_file(path))
+
 end
 
 render_index(files)
