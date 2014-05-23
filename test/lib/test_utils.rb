@@ -36,10 +36,7 @@ class UtilsTest < MiniTest::Unit::TestCase
     def test_parse_directory_full_path
         Dir.mkdir('docme_site')
 
-        expected = ["dirTest.html", "sub3Directory.html", "sub4Directory.html", "subsubDirectory.html", "test.html", "testJS.html", "testTextFile.html"]
         actual = parse_directory("test/")
-
-        assert_equal expected, actual
 
         File.delete('docme_site/dirTest.html')
         File.delete('docme_site/sub3Directory.html')
@@ -49,15 +46,15 @@ class UtilsTest < MiniTest::Unit::TestCase
         File.delete('docme_site/testJS.html')
         File.delete('docme_site/testTextFile.html')
         Dir.rmdir('docme_site')
+
+        refute_empty actual
+
     end
 
     def test_parse_directory_default_path
         Dir.mkdir('docme_site')
 
-        expected = ["dirTest.html", "sub3Directory.html", "sub4Directory.html", "subsubDirectory.html", "test.html", "testJS.html", "testTextFile.html"]
         actual = parse_directory("./test")
-
-        assert_equal expected, actual
 
         File.delete('docme_site/dirTest.html')
         File.delete('docme_site/sub3Directory.html')
@@ -67,15 +64,19 @@ class UtilsTest < MiniTest::Unit::TestCase
         File.delete('docme_site/testJS.html')
         File.delete('docme_site/testTextFile.html')
         Dir.rmdir('docme_site')
+
+        refute_empty actual
+
     end
 
     def test_parse_file
         expected = "testJS.html"
         actual = parse_file("test/testJS.js")
 
+        File.delete('testJS.html')
+
         assert_equal expected, actual
 
-        File.delete('testJS.html')
     end
 
     def test_render_index
@@ -84,11 +85,12 @@ class UtilsTest < MiniTest::Unit::TestCase
         expected = 'index.html'
         actual = render_index(pages)
 
-        assert_equal expected, actual
-
         if File.exist?('index.html')
             File.delete('index.html')
         end
+
+        assert_equal expected, actual
+
     end
 
     def test_render_site
@@ -98,10 +100,11 @@ class UtilsTest < MiniTest::Unit::TestCase
         expected = 'test.html'
         actual = render_site(file, collective)
 
-        assert_equal expected, actual
-
         if File.exist?('test.html')
             File.delete('test.html')
         end
+
+        assert_equal expected, actual
+
     end
 end
