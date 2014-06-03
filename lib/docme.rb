@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # class docme
 
 require 'docme/utils'

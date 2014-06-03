@@ -1,6 +1,31 @@
 require 'test_helper'
 
 class UtilsTest < MiniTest::Unit::TestCase
+
+    def setup
+        if Dir.exist?('docme_site')
+            raise 'A docme_site directory already exists, please remove it and continue.'
+        end
+
+        Dir.mkdir('docme_site')
+    end
+
+    def teardown
+        File.delete('docme_site/dirTest.html') unless !File.exists?("docme_site/dirTest.html")
+        File.delete('docme_site/sub3Directory.html') unless !File.exists?('docme_site/sub3Directory.html')
+        File.delete('docme_site/sub4Directory.html') unless !File.exists?('docme_site/sub4Directory.html')
+        File.delete('docme_site/subsubDirectory.html') unless !File.exists?('docme_site/subsubDirectory.html')
+        File.delete('docme_site/test.html') unless !File.exists?('docme_site/test.html')
+        File.delete('docme_site/testJS.html') unless !File.exists?('docme_site/testJS.html')
+        File.delete('docme_site/testTextFile.html') unless !File.exists?('docme_site/testTextFile.html')
+        File.delete('docme_site/index.html') unless !File.exists?('docme_site/index.html')
+        Dir.rmdir('docme_site') unless !Dir.exist?('docme_site')
+
+        File.delete('index.html') unless !File.exists?('index.html')
+        File.delete('test.html') unless !File.exists?('test.html')
+    end
+
+
     def test_clean_attribute
         assert_equal "TREX", clean_attribute("+[trex]")
     end
@@ -30,50 +55,43 @@ class UtilsTest < MiniTest::Unit::TestCase
     end
 
     def test_clean_filename_long
-        assert_equal "trex", clean_filename("long/long/file/path/to/trex.js")
+        assert_equal "trex", clean_filename("extra/long/long/file/path/to/trex.js")
+    end
+
+    def test_unsupported_extension_false
+        assert_equal false, unsupported_extension('goodExtension.html')
+    end
+
+    def test_unsupported_extension_true
+        assert_equal true, unsupported_extension('test/dirTest/Archive.zip')
     end
 
     def test_parse_directory_full_path
-        Dir.mkdir('docme_site')
 
         actual = parse_directory("test/")
-
-        File.delete('docme_site/dirTest.html')
-        File.delete('docme_site/sub3Directory.html')
-        File.delete('docme_site/sub4Directory.html')
-        File.delete('docme_site/subsubDirectory.html')
-        File.delete('docme_site/test.html')
-        File.delete('docme_site/testJS.html')
-        File.delete('docme_site/testTextFile.html')
-        Dir.rmdir('docme_site')
 
         refute_empty actual
 
     end
 
-    def test_parse_directory_default_path
-        Dir.mkdir('docme_site')
+    def test_parse_directory_single_hidden_file
 
-        actual = parse_directory("./test")
-
-        File.delete('docme_site/dirTest.html')
-        File.delete('docme_site/sub3Directory.html')
-        File.delete('docme_site/sub4Directory.html')
-        File.delete('docme_site/subsubDirectory.html')
-        File.delete('docme_site/test.html')
-        File.delete('docme_site/testJS.html')
-        File.delete('docme_site/testTextFile.html')
-        Dir.rmdir('docme_site')
+        actual = parse_directory('test/dirTest')
 
         refute_empty actual
+        assert_equal false, actual.include?('hiddenfile.html')
 
+    end
+
+    def test_parse_file_hidden_file
+        actual = parse_file('test/dirTest/.test.txt')
+
+        assert_equal nil, actual
     end
 
     def test_parse_file
         expected = "testJS.html"
-        actual = parse_file("test/testJS.js")
-
-        File.delete('testJS.html')
+        actual = parse_file("test/dirTest/testJS.js")
 
         assert_equal expected, actual
 
@@ -85,10 +103,6 @@ class UtilsTest < MiniTest::Unit::TestCase
         expected = 'index.html'
         actual = render_index(pages)
 
-        if File.exist?('index.html')
-            File.delete('index.html')
-        end
-
         assert_equal expected, actual
 
     end
@@ -99,10 +113,6 @@ class UtilsTest < MiniTest::Unit::TestCase
 
         expected = 'test.html'
         actual = render_site(file, collective)
-
-        if File.exist?('test.html')
-            File.delete('test.html')
-        end
 
         assert_equal expected, actual
 
