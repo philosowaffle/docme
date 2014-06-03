@@ -34,7 +34,7 @@ end
 def unsupported_extension(file)
     stop = true
 
-    unsupported_extensions = ['.gem', '.jar', '.gemspec', '.zip', '.tar', '.gz', '.tar.gz', '.jpeg', '.jpg', '.png', '.exe', ]
+    unsupported_extensions = ['.gem', '.jar', '.gemspec', '.zip', '.tar', '.gz', '.tar.gz', '.jpeg', '.jpg', '.png', '.exe' ]
 
     stop = false unless unsupported_extensions.include?(File.extname(file)) || File.executable?(file) || File.executable_real?(file)
 
