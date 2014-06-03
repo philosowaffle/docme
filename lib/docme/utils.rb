@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # docme utils
 
 def clean_attribute(attr)
@@ -30,15 +31,31 @@ def clean_filename(file)
     file
 end
 
+def unsupported_extension(file)
+    stop = true
+
+    unsupported_extensions = ['.gem', '.jar', '.gemspec', '.zip', '.tar', '.gz', '.tar.gz', '.jpeg', '.jpg', '.png', '.exe']
+
+    stop = false unless unsupported_extensions.include?(File.extname(file)) || File.executable?(file) || File.executable_real?(file)
+
+    stop
+end
+
+def unsupported_encoding(file)
+    stop = true
+
+    stop = false unless file.encoding.name != 'UTF-8'
+
+    stop
+end
+
 def parse_directory(path)
 
     files_array = []
 
     # for each file in the sub directory
     Dir.foreach(path) do |f|
-        next if f == '.' || f == '..'
-
-        next if f.rindex('.', 0)
+        next if f == '.' || f == '..' || f.rindex('.', 0) ||  unsupported_extension(f) || unsupported_encoding(f)
 
         # if another directory then go inside
         if File.directory?(path + '/' + f)
@@ -61,11 +78,17 @@ def parse_directory(path)
 
 end
 
-def parse_file(path)
+def parse_file(file)
 
-    page = Docme.j_parse(path)
+    if File.file?(file) && File.exist?(file) && !file.rindex('.', 0) && !unsupported_encoding(file) && !unsupported_extension(file)
 
-    page
+        page = Docme.j_parse(file)
+
+        page
+
+    else
+        nil
+    end
 
 end
 

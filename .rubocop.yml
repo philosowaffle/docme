@@ -1,4 +1,7 @@
 AllCops:
+    Include:
+        - bin/docme
+        - lib/**/*
     Exclude:
         - test/**/*
         - coverage/**/*
@@ -26,7 +29,10 @@ MethodLength:
   Enabled: false
 
 CyclomaticComplexity:
-  Max: 19
+  Max: 16
 
 Next:
+  Enabled: false
+
+Style/LeadingCommentSpace:
   Enabled: false

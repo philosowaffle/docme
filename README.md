@@ -12,41 +12,24 @@ docme serves as a straight forward, quick, and highly customizable documentation
 
 ###Usage
 
+NOTE: View the specific README for the release you are using [here](https://github.com/philosowaffle/docme/releases)
+
 Provide a file from the command line (see the `/test` folder for syntax examples).  Currently supports any file type that recognizes `/* */` as a comment block.
 
 Install the gem from [RubyGem](https://rubygems.org/gems/docme)
 
-    >gem install docme
-    >docme <path/to/file>
+    > gem install docme
+    > docme <path/to/file>
 
     OR
 
-    >docme <path/to/directory/>
+    > docme <path/to/directory/>
 
-Currently docme can process up to 2 levels of directories i.e
+Currently docme will begin in the directory provided and parse through all nested directories ignoring hidden files.  If you only give docme a single file then it will simply parse that one file.  docme prefers UTF-8 encoded files.
 
-       -home
-       |-- test
-           |
-           |-file.txt
-           |-file.java
-           |-- subTest
-                |
-                |-file.js
-                |-otherfile.txt
-                |-- subsubFolder
-                    |
-                    |-anotherFile.txt
+You can also use the current directory by simply saying:
 
-If you ran the following command from your home directory:
-
-    >docme test
-
-Then docme me would parse the `test/` directory and all of the FILES in the `subTest/` directory, ignoring the `subsubFolder/` directory.
-
-You can also use the current directory
-
-    >docme ./
+    > docme
 
 This will generate a `docme_site` folder in the current directory.  Inside this folder you will find an `.html` file for each file that docme parsed.  Additionally there will be an `index.html` file that compiles all of the links into one easy landing page.
 
