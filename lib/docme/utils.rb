@@ -36,7 +36,7 @@ def unsupported_extension(file)
 
     unsupported_extensions = ['.gem', '.jar', '.gemspec', '.zip', '.tar', '.gz', '.tar.gz', '.jpeg', '.jpg', '.png', '.exe']
 
-    stop = false unless unsupported_extensions.include?(File.extname(file)) || File.executable?(file) || File.executable_real?(file)
+    stop = false unless unsupported_extensions.include?(File.extname(file)) || (File.executable?(file) && !Dir.exist?(file)) || (File.executable_real?(file) && !Dir.exist?(file))
 
     stop
 end
@@ -55,7 +55,8 @@ def parse_directory(path)
 
     # for each file in the sub directory
     Dir.foreach(path) do |f|
-        next if f == '.' || f == '..' || f.rindex('.', 0) ||  unsupported_extension(f) || unsupported_encoding(f)
+
+        next if f == '.' || f == '..' || f.rindex('.', 0) || unsupported_encoding(f) ||  unsupported_extension(f)
 
         # if another directory then go inside
         if File.directory?(path + '/' + f)
@@ -68,7 +69,6 @@ def parse_directory(path)
 
             if temp_page
                 files_array.push(temp_page)
-                FileUtils.mv(temp_page, 'docme_site/' + temp_page)
             end
 
         end
@@ -95,7 +95,11 @@ end
 def render_index(pages)
     # puts pages
 
-    @pages = pages
+    @pages = []
+
+    pages.each do |file|
+        @pages.push(file['file'])
+    end
 
     template = '<!DOCTYPE html>
                     <html>
@@ -114,9 +118,7 @@ def render_index(pages)
                             <div id="wrapper">
                                 <div class="list-group">
                                     <% for @page in @pages %>
-
-                                        <% @name = clean_filename(@page) %>
-                                        <a href="<%= @page %>" class="list-group-item list-group-item-info"><%= @name %></a>
+                                        <a href="<%= @page %>.html" class="list-group-item list-group-item-info"><%= @page %></a>
 
                                     <% end %>
                                 </div>
@@ -135,10 +137,15 @@ def render_index(pages)
 
 end
 
-def render_site(file, content)
+def render_site(file_object, files_index)
 
-    @collective = content
-    @filename = file
+    @collective = file_object['content']
+    @filename = file_object['file']
+    @index = []
+
+    files_index.each do |file|
+        @index.push(file['file'])
+    end
 
     # puts content
 
@@ -157,7 +164,7 @@ def render_site(file, content)
                                     padding-left: 10%;
                                 }
                                 #side-panel{
-                                width: 10%;
+                                width: 15%;
                                 float: left;
                                 padding-left: 10px;
                              }
@@ -194,6 +201,9 @@ def render_site(file, content)
                             </nav>
                             <div id="side-panel" class="panel panel-default">
                                 <a href="index.html" class="list-group-item list-group-item-info">INDEX</a>
+                                <% for @page in @index %>
+                                    <a class="list-group-item list-group-item-info" href="<%= @page %>.html"><%= @page %></a>
+                                <% end %>
                             </div>
                             <div id="panels-wrapper">
                                 <% for @borg in @collective %>
@@ -256,6 +266,8 @@ def render_site(file, content)
     File.open(page, 'w+') do |f|
         f.write(renderer.result(binding))
     end
+
+    FileUtils.mv(page, 'docme_site/' + page)
 
     page
 

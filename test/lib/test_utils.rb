@@ -90,10 +90,9 @@ class UtilsTest < MiniTest::Unit::TestCase
     end
 
     def test_parse_file
-        expected = "testJS.html"
         actual = parse_file("test/dirTest/testJS.js")
 
-        assert_equal expected, actual
+        refute_empty actual
 
     end
 
@@ -108,11 +107,12 @@ class UtilsTest < MiniTest::Unit::TestCase
     end
 
     def test_render_site
-        file = 'test'
-        collective = {'title' => 'this is a test'}
+
+        test_set = [{ 'file' => 'test2', 'content' => { 'title' => 'this is another test'} }, { 'file' => 'test', 'content' => { 'title' => 'this is a test'} } ]
+        test_object = { 'file' => 'test', 'content' => { 'title' => 'this is a test'} }
 
         expected = 'test.html'
-        actual = render_site(file, collective)
+        actual = render_site(test_object, test_set)
 
         assert_equal expected, actual
 
