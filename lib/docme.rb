@@ -104,10 +104,8 @@ class Docme
 
         end
 
-        # RENDER SITE
-        # TODO: pull this out a level so we can have an index on each page aswell
         if collective.length > 0
-            page = render_site(file, collective)
+            page = { 'file' => file, 'content' => collective }
             return page
         end
 
