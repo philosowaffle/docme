@@ -5,8 +5,6 @@ require 'docme'
 require 'docme/utils'
 require 'fileutils'
 
-files = []
-
 if ARGV[0].nil?
     path = Dir.pwd
     puts path
@@ -16,36 +14,10 @@ end
 
 puts "\n  ***Begining docme magix***"
 
-# create the directory where the site will be stored
-unless File.directory?('docme_site')
-    puts "+Setting up docme's living arrangements."
-    Dir.mkdir('docme_site')
-    puts ' +Woohoo! docme has a home!'
-end
-
-# if a directory was provided
-if File.directory?(path)
-
-    files.concat parse_directory(path)
-
-else # if a single file was provided
-
-    page = parse_file(path)
-
-    unless page.nil?
-        files.push(page)
-    end
-
-end
-
-files.each do |file_object|
-    render_site(file_object, files)
-end
-
-render_index(files)
-
-# add page to docme dir
-FileUtils.mv('index.html', 'docme_site/index.html')
+docmeer = Docme.new(path)
+docmeer.scan_docs
+docmeer.render_docs
+docmeer.render_index
 
 puts "\n  ***Finished docme magic!***"
 puts "\n  You can find your docs inside the `docme_site` folder. \n   Hint: look for index.html\n\n"

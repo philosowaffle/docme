@@ -92,29 +92,40 @@ class UtilsTest < MiniTest::Unit::TestCase
     def test_parse_file
         actual = parse_file("test/dirTest/testJS.js")
 
-        refute_empty actual
+        assert_equal false, actual.is_empty
 
     end
 
-    def test_render_index
-        pages = ['test.html', 'test2.html', 'test3.html']
+    def test_integration_one
+        docmeer = Docme.new('test/dirTest/subsubDirectoryTest/sub3directory')
+        docmeer.scan_docs
+        docmeer.render_docs
 
-        expected = 'index.html'
-        actual = render_index(pages)
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub3Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
+        docmeer.render_index
 
-        assert_equal expected, actual
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
 
     end
 
-    def test_render_site
+    def test_integration_two
+        docmeer = Docme.new('test/')
+        docmeer.scan_docs
+        docmeer.render_docs
 
-        test_set = [{ 'file' => 'test2', 'content' => { 'title' => 'this is another test'} }, { 'file' => 'test', 'content' => { 'title' => 'this is a test'} } ]
-        test_object = { 'file' => 'test', 'content' => { 'title' => 'this is a test'} }
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub3Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/subsubDirectory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/dirTest.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
 
-        expected = 'test.html'
-        actual = render_site(test_object, test_set)
+        docmeer.render_index
 
-        assert_equal expected, actual
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
 
     end
 end
