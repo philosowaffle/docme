@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
     s.name = 'docme'
-    s.version = '1.1.0'
+    s.version = '2.0.0-SNAPSHOT'
     s.executables << 'docme'
     s.date = '2014-06-06'
     s.summary = "A documentation site generator."
