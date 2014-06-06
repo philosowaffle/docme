@@ -9,14 +9,12 @@ AllCops:
         - Rakefile
         - Gemfile
         - docme.gemspec
+        - lib/templates/**/*
 
 Documentation:
   Enabled: false
 
 EmptyLinesAroundBody:
-  Enabled: false
-
-IfUnlessModifier:
   Enabled: false
 
 IndentationWidth:
@@ -29,10 +27,13 @@ MethodLength:
   Enabled: false
 
 CyclomaticComplexity:
-  Max: 16
+  Max: 12
 
-Next:
+Style/Next:
   Enabled: false
 
 Style/LeadingCommentSpace:
   Enabled: false
+
+# Style/ClassLength:
+#   Max: 134
