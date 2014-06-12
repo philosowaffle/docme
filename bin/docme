@@ -1,23 +1,10 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
 
-require 'docme'
-require 'docme/utils'
-require 'fileutils'
+require 'docme/DocmeCLI'
+require 'thor'
 
-if ARGV[0].nil?
-    path = Dir.pwd
-    puts path
-else
-    path = ARGV[0]
-end
-
-puts "\n  ***Begining docme magix***"
-
-docmeer = Docme.new(path)
-docmeer.scan_docs
-docmeer.render_docs
-docmeer.render_index
+DocmeCLI.start(ARGV)
 
 puts "\n  ***Finished docme magic!***"
 puts "\n  You can find your docs inside the `docme_site` folder. \n   Hint: look for index.html\n\n"
