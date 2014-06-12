@@ -30,7 +30,7 @@ class Docme
 
         else # if a single file was provided
 
-            @pages.concat parse_file(@path)
+            @pages.push(@path)
 
         end
     end
