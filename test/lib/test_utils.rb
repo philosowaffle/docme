@@ -128,4 +128,22 @@ class UtilsTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
 
     end
+
+    def test_integration_three
+        docmeer = Docme.new('test/dirTest/testJS.js')
+        docmeer.scan_docs
+        docmeer.render_docs
+
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub3Directory.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/subsubDirectory.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/dirTest.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
+
+        docmeer.render_index
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+    end
 end
