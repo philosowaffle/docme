@@ -91,3 +91,22 @@ def parse_file(file)
     end
 
 end
+
+def clean_directory(path)
+    # for each file in the directory
+    Dir.foreach(path) do |f|
+
+        next if f == '.' || f == '..'
+
+        # if another directory then go inside
+        if File.directory?(path + '/' + f)
+
+            clean_directory(path + '/' + f)
+
+        else # else parse normally
+
+            File.delete(path + '/' + f)
+
+        end
+    end
+end
