@@ -3,7 +3,6 @@
 
 require 'docme'
 require 'docme/utils'
-require 'docme/docmeCLI'
 require 'fileutils'
 require 'thor'
 
