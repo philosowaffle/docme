@@ -7,6 +7,7 @@ require 'fileutils'
 require 'thor'
 
 class DocmeCLI < Thor
+    class_option :v, :type => :boolean, :aliase => :verbose
 
     desc 'default', 'When no commands are provided docme will begin the current directory and parse through all eligible folders and files.'
     def default
@@ -15,7 +16,7 @@ class DocmeCLI < Thor
 
         puts '\n  ***Begining docme magix***'
 
-        docmeer = Docme.new(path)
+        docmeer = Docme.new(path, :v)
         docmeer.scan_docs
         docmeer.render_docs
         docmeer.render_index
@@ -28,7 +29,7 @@ class DocmeCLI < Thor
 
         puts '\n  ***Begining docme magix***'
 
-        docmeer = Docme.new(path)
+        docmeer = Docme.new(path, :v)
         docmeer.scan_docs
         docmeer.render_docs
         docmeer.render_index
