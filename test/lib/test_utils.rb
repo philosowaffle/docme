@@ -6,12 +6,10 @@ class UtilsTest < MiniTest::Unit::TestCase
         if Dir.exist?('docme_site')
             raise 'A docme_site directory already exists, please remove it and continue.'
         end
-
-        Dir.mkdir('docme_site')
     end
 
     def teardown
-        clean_directory(Dir.pwd + '/docme_site')
+        clean_directory(Dir.pwd + '/docme_site') if Dir.exist?(Dir.pwd + '/docme_site')
         Dir.rmdir('docme_site') unless !Dir.exist?('docme_site')
 
         File.delete('index.html') unless !File.exists?('index.html')

@@ -8,8 +8,6 @@ class IntegrationTest < MiniTest::Unit::TestCase
         if Dir.exist?('docme_site')
             raise 'A docme_site directory already exists, please remove it and continue.'
         end
-
-        Dir.mkdir('docme_site')
     end
 
     def teardown
