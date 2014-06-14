@@ -36,7 +36,7 @@ end
 def unsupported_extension(file)
     parse = true
 
-    unsupported_extensions = ['.gem', '.jar', '.gemspec', '.zip', '.tar', '.gz', '.tar.gz', '.jpeg', '.jpg', '.png', '.exe']
+    unsupported_extensions = ['.gem', '.jar', '.gemspec', '.zip', '.tar', '.gz', '.tar.gz', '.jpeg', '.jpg', '.png', '.exe', '.md', '.lock']
 
     parse = false unless unsupported_extensions.include?(File.extname(file)) || (File.executable?(file) && !Dir.exist?(file)) || (File.executable_real?(file) && !Dir.exist?(file))
 
@@ -51,7 +51,7 @@ def unsupported_encoding(file)
     parse
 end
 
-def parse_directory(path)
+def parse_directory(path, is_verbose = nil)
 
     files_array = []
 
@@ -63,11 +63,13 @@ def parse_directory(path)
         # if another directory then go inside
         if File.directory?(path + '/' + f)
 
+            puts ' - docme parsing path: ' + f if is_verbose
+
             files_array.concat parse_directory(path + '/' + f)
 
         else # else parse normally
 
-            temp_page = parse_file(path + '/' + f)
+            temp_page = parse_file(path + '/' + f, is_verbose)
             files_array.push(temp_page) unless temp_page.nil? || temp_page.is_empty == true
 
         end
@@ -77,9 +79,11 @@ def parse_directory(path)
 
 end
 
-def parse_file(file)
+def parse_file(file, is_verbose = nil)
 
     if File.file?(file) && File.exist?(file) && !file.rindex('.', 0) && !unsupported_encoding(file) && !unsupported_extension(file)
+
+        puts ' - docme parsing page: ' + file if is_verbose
 
         page = Page.new(file)
         page.parse_blocks
@@ -92,7 +96,7 @@ def parse_file(file)
 
 end
 
-def clean_directory(path)
+def clean_directory(path, is_verbose = nil)
     # for each file in the directory
     Dir.foreach(path) do |f|
 
@@ -103,7 +107,9 @@ def clean_directory(path)
 
             clean_directory(path + '/' + f)
 
-        else # else parse normally
+        else # else delete file
+
+            puts ' - docme removing file: ' + f if is_verbose
 
             File.delete(path + '/' + f)
 

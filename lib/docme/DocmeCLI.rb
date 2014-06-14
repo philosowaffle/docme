@@ -7,15 +7,16 @@ require 'fileutils'
 require 'thor'
 
 class DocmeCLI < Thor
+    class_option :v, type: :boolean
 
     desc 'default', 'When no commands are provided docme will begin the current directory and parse through all eligible folders and files.'
     def default
         path = Dir.pwd
         puts path
 
-        puts '\n  ***Begining docme magix***'
+        puts "\n  ***Begining docme magix***"
 
-        docmeer = Docme.new(path)
+        docmeer = Docme.new(path, options[:v])
         docmeer.scan_docs
         docmeer.render_docs
         docmeer.render_index
@@ -31,8 +32,14 @@ class DocmeCLI < Thor
 
         fail 'Please provide a valid path to a directory that contains a `docme_site` folder.' unless Dir.exist?(path + '/docme_site')
 
-        clean_directory(path + '/docme_site')
+        puts '+ docme will clean ' + path if options[:v]
+        puts '+ docme cleaning' if options[:v]
+
+        clean_directory(path + '/docme_site', options[:v])
         Dir.rmdir(path + '/docme_site') if Dir.exist?(path + '/docme_site')
+
+        puts '+ docme_site removed' if options[:v]
+        puts '+ docme is now homeless' if options[:v]
 
     end
 
@@ -40,9 +47,9 @@ class DocmeCLI < Thor
     def parse(path)
         puts path
 
-        puts '\n  ***Begining docme magix***'
+        puts "\n  ***Begining docme magix***"
 
-        docmeer = Docme.new(path)
+        docmeer = Docme.new(path, options[:v])
         docmeer.scan_docs
         docmeer.render_docs
         docmeer.render_index
