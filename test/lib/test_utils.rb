@@ -11,14 +11,7 @@ class UtilsTest < MiniTest::Unit::TestCase
     end
 
     def teardown
-        File.delete('docme_site/dirTest.html') unless !File.exists?("docme_site/dirTest.html")
-        File.delete('docme_site/sub3Directory.html') unless !File.exists?('docme_site/sub3Directory.html')
-        File.delete('docme_site/sub4Directory.html') unless !File.exists?('docme_site/sub4Directory.html')
-        File.delete('docme_site/subsubDirectory.html') unless !File.exists?('docme_site/subsubDirectory.html')
-        File.delete('docme_site/test.html') unless !File.exists?('docme_site/test.html')
-        File.delete('docme_site/testJS.html') unless !File.exists?('docme_site/testJS.html')
-        File.delete('docme_site/testTextFile.html') unless !File.exists?('docme_site/testTextFile.html')
-        File.delete('docme_site/index.html') unless !File.exists?('docme_site/index.html')
+        clean_directory(Dir.pwd + '/docme_site')
         Dir.rmdir('docme_site') unless !Dir.exist?('docme_site')
 
         File.delete('index.html') unless !File.exists?('index.html')
@@ -94,5 +87,19 @@ class UtilsTest < MiniTest::Unit::TestCase
 
         assert_equal false, actual.is_empty
 
+    end
+
+    def test_clean_directory
+        docmeer = Docme.new('test/dirTest/subsubDirectoryTest/sub3directory')
+        docmeer.scan_docs
+        docmeer.render_docs
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub3Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
+        docmeer.render_index
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        clean_directory(Dir.pwd + '/docme_site')
     end
 end

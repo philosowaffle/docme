@@ -5,6 +5,3 @@ require 'docme/DocmeCLI'
 require 'thor'
 
 DocmeCLI.start(ARGV)
-
-puts "\n  ***Finished docme magic!***"
-puts "\n  You can find your docs inside the `docme_site` folder. \n   Hint: look for index.html\n\n"
