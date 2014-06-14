@@ -14,7 +14,7 @@ class Docme
         @pages = []
         @is_verbose = is_verbose
 
-        puts 'docme will parse: ' + @path if @is_verbose
+        puts '+ docme will parse: ' + @path if @is_verbose
 
         make_home
     end
@@ -34,11 +34,11 @@ class Docme
         # if a directory was provided
         if File.directory?(@path)
 
-            @pages.concat parse_directory(@path)
+            @pages.concat parse_directory(@path, @is_verbose)
 
         else # if a single file was provided
 
-            @pages.push(parse_file(@path))
+            @pages.push(parse_file(@path, @is_verbose))
 
         end
     end
