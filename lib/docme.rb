@@ -7,11 +7,12 @@ require 'fileutils'
 
 class Docme
 
-    def initialize(path, is_verbose = nil, style = nil)
+    def initialize(path, is_verbose = nil, style = nil, index = nil)
         @path = path
         @pages = []
         @is_verbose = is_verbose
         @style = style
+        @index = index
 
         puts '+ docme will parse: ' + @path if @is_verbose
 
@@ -62,7 +63,11 @@ class Docme
 
         puts '+ docme is creating the index' if @is_verbose
 
-        template = File.read(File.join(File.dirname(__FILE__), 'templates/index.erb'))
+        if @index.nil?
+            template = File.read(File.join(File.dirname(__FILE__), 'templates/index.erb'))
+        else
+            template = File.read(File.join(Dir.pwd, @index))
+        end
 
         renderer = ERB.new(template)
 
