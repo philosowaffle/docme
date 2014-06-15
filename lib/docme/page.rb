@@ -18,6 +18,7 @@ class Page
     def initialize(file)
         @name = clean_filename(file)
         @source_file = File.open(file).read
+        @page_erb = '../templates/page.erb'
         @blocks  = []
         @is_empty = true
     end
@@ -46,16 +47,18 @@ class Page
         @is_empty = @blocks.empty?
     end
 
-    def render_site(index)
+    def render_site(index, page_erb = nil)
         @index = []
 
         index.each do |page|
             @index.push(page.name)
         end
 
-        # puts content
-        renderer = ERB.new(File.read(File.join(File.dirname(__FILE__), '../templates/page.erb'))
-)
+        if page_erb.nil?
+            renderer = ERB.new(File.read(File.join(File.dirname(__FILE__), @page_erb)))
+        else
+            renderer = ERB.new(File.read(File.join(Dir.pwd, page_erb)))
+        end
 
         page = @name + '.html'
 

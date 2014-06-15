@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="style.css" rel="stylesheet">
+
+    </head>
+
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+
+    <body>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a class="navbar-brand" href="#"><%= @name%></a></li>
+                </ul>
+            </div>
+          </div>
+        </nav>
+        <div id="side-panel" class="panel panel-default">
+            <a href="index.html" class="list-group-item list-group-item-info">INDEX</a>
+            <% for @page in @index %>
+                <a class="list-group-item list-group-item-info" href="<%= @page %>.html"><%= @page %></a>
+                This is a test page.
+            <% end %>
+        </div>
+        <div id="panels-wrapper">
+            <% for @block in @blocks %>
+                <div class="panel panel-primary">
+                    <% @attributes = @block.attributes %>
+                    <% for @attribute in @attributes %>
+                        <% if @attribute[0] == "TITLE" %>
+                            <div class="panel-heading" id="<%= @attribute[1]%>">
+                                    <h2 class="panel-title"><%= @attribute[1] %></h2>
+                              </div>
+                              <div class="panel-body">
+                        <% end %>
+                        <% if @attribute[0] == "CODE" %>
+                                <h4>CODE</h4>
+                                    <p class="code"><%= @attribute[1] %></p>
+                        <% end %>
+                        <% if @attribute[0] != "TITLE" && @attribute[0] != "CODE" %>
+                            <% if @attribute[1].class == Hash %>
+                                <% if @attribute[0] == "ANCHOR" %>
+                                    <h4><%= @attribute[0] %></h4>
+                                    <table class="table">
+                                        <% for @item in @attribute[1]%>
+                                            <tr>
+                                                <th><%= @item[0] %></th>
+                                                <td><a href="<%= @item[1] %>"><%= @item[1] %></a></td>
+                                            </tr>
+                                        <% end %>
+                                    </table>
+                                <% else %>
+                                    <h4><%= @attribute[0] %></h4>
+                                    <table class="table">
+                                        <% for @item in @attribute[1]%>
+                                            <tr>
+                                                <th><%= @item[0] %></th>
+                                                <td><%= @item[1] %></td>
+                                            </tr>
+                                        <% end %>
+                                    </table>
+                                <% end %>
+                            <% end %>
+                            <% if @attribute[0] != "CODE" && @attribute[0] != "TITLE" && @attribute[1].class != Hash%>
+                                <h4><%= @attribute[0]%></h4>
+                                <p><%= @attribute[1] %></p>
+                            <% end %>
+                        <%  end %>
+                    <% end %>
+                    </div>
+                </div>
+            <% end %>
+            </div>
+
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

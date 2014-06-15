@@ -12,11 +12,12 @@ class DocmeCLI < Thor
     desc 'default', '`docme` When no commands are provided docme will begin the current directory and parse through all eligible folders and files.'
     option :style, type: :string
     option :index, type: :string
+    option :page, type: :string
     def default
         path = Dir.pwd
         puts "\n  ***Begining docme magix***"
 
-        docmeer = Docme.new(path, options[:v], options[:style], options[:index])
+        docmeer = Docme.new(path, options[:v], options[:style], options[:index], options[:page])
         docmeer.engage
 
         puts "\n  ***Finished docme magic!***"
@@ -49,17 +50,20 @@ class DocmeCLI < Thor
 
     `docme parse <path/to/folder> --style <path/to/css.erb>` will use your own custom styling options.  This file must contain valid css and be saved as `.erb` file.
 
-    `docme pase <path/to/folder> --index <path/to/index.erb>` will use your own custom html to build the index page of the site.
+    `docme parse <path/to/folder> --index <path/to/index.erb>` will use your own custom html to build the index page of the site.
+
+    `docme parse <path/to/folder> --page <path/to/yourPage.erb>` will use your own custom html to build the pages of the site.
 
     Use the `-v` flag on any command to recieve verbose output.
     LONGDESC
     option :style, type: :string
     option :index, type: :string
+    option :page, type: :string
     def parse(path)
 
         puts "\n  ***Begining docme magix***"
 
-        docmeer = Docme.new(path, options[:v], options[:style], options[:index])
+        docmeer = Docme.new(path, options[:v], options[:style], options[:index], options[:page])
         docmeer.engage
 
         puts "\n  ***Finished docme magic!***"
