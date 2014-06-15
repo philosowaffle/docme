@@ -10,7 +10,7 @@ class DocmeCLI < Thor
     class_option :v, type: :boolean
 
     desc 'default', '`docme` When no commands are provided docme will begin the current directory and parse through all eligible folders and files.'
-    option :style, :type => :string
+    option :style, type: :string
     def default
         path = Dir.pwd
         puts "\n  ***Begining docme magix***"
@@ -50,7 +50,7 @@ class DocmeCLI < Thor
 
     Use the `-v` flag on any command to recieve verbose output.
     LONGDESC
-    option :style, :type => :string
+    option :style, type: :string
     def parse(path)
 
         puts "\n  ***Begining docme magix***"
