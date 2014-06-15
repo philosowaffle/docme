@@ -128,6 +128,23 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
+    def test_integration_CLI_defualt_page
+        input = ['--page', '/test/dirTest/pageTest.erb']
+
+        DocmeCLI.start(input)
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub3Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/subsubDirectory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/dirTest.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
+    end
+
     def test_integration_CLI_parse
         path = Dir.pwd
         input = ['parse', path]
@@ -182,9 +199,27 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
+    def test_integration_CLI_parse_page
+        path = Dir.pwd
+        input = ['parse', path, '--page', '/test/dirTest/pageTest.erb']
+
+        DocmeCLI.start(input)
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub3Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/subsubDirectory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/dirTest.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
+    end
+
     def test_integration_CLI_ALL
         path = Dir.pwd
-        input = ['parse', path, '--index', '/test/dirTest/indexTest.erb', '--style', '/test/dirTest/testStyle.erb']
+        input = ['parse', path, '--index', 'test/dirTest/indexTest.erb', '--style', 'test/dirTest/testStyle.erb', '--page', '/test/dirTest/pageTest.erb']
 
         DocmeCLI.start(input)
 

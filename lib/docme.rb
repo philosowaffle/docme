@@ -7,12 +7,13 @@ require 'fileutils'
 
 class Docme
 
-    def initialize(path, is_verbose = nil, style = nil, index = nil)
+    def initialize(path, is_verbose = nil, style = nil, index = nil, page_erb = nil)
         @path = path
         @pages = []
         @is_verbose = is_verbose
         @style = style
         @index = index
+        @page_erb = page_erb
 
         puts '+ docme will parse: ' + @path if @is_verbose
 
@@ -54,7 +55,7 @@ class Docme
     def render_docs
         puts '+ docme generated the following pages: ' if @is_verbose
         @pages.each do |page_object|
-            page_object.render_site(@pages)
+            page_object.render_site(@pages, @page_erb)
             puts ' - ' + page_object.name if @is_verbose
         end
     end

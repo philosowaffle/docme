@@ -12,11 +12,12 @@ class DocmeCLI < Thor
     desc 'default', '`docme` When no commands are provided docme will begin the current directory and parse through all eligible folders and files.'
     option :style, type: :string
     option :index, type: :string
+    option :page, type: :string
     def default
         path = Dir.pwd
         puts "\n  ***Begining docme magix***"
 
-        docmeer = Docme.new(path, options[:v], options[:style], options[:index])
+        docmeer = Docme.new(path, options[:v], options[:style], options[:index], options[:page])
         docmeer.engage
 
         puts "\n  ***Finished docme magic!***"
@@ -55,11 +56,12 @@ class DocmeCLI < Thor
     LONGDESC
     option :style, type: :string
     option :index, type: :string
+    option :page, type: :string
     def parse(path)
 
         puts "\n  ***Begining docme magix***"
 
-        docmeer = Docme.new(path, options[:v], options[:style], options[:index])
+        docmeer = Docme.new(path, options[:v], options[:style], options[:index], options[:page])
         docmeer.engage
 
         puts "\n  ***Finished docme magic!***"
