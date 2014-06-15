@@ -50,7 +50,9 @@ class DocmeCLI < Thor
 
     `docme parse <path/to/folder> --style <path/to/css.erb>` will use your own custom styling options.  This file must contain valid css and be saved as `.erb` file.
 
-    `docme pase <path/to/folder> --index <path/to/index.erb>` will use your own custom html to build the index page of the site.
+    `docme parse <path/to/folder> --index <path/to/index.erb>` will use your own custom html to build the index page of the site.
+
+    `docme parse <path/to/folder> --page <path/to/yourPage.erb>` will use your own custom html to build the pages of the site.
 
     Use the `-v` flag on any command to recieve verbose output.
     LONGDESC
