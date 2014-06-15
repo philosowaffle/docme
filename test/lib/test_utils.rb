@@ -99,5 +99,10 @@ class UtilsTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
 
         clean_directory(Dir.pwd + '/docme_site')
+
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub3Directory.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
     end
 end

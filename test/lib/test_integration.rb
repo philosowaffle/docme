@@ -25,9 +25,12 @@ class IntegrationTest < MiniTest::Unit::TestCase
 
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub3Directory.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
+
         docmeer.render_index
+        docmeer.render_css
 
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
 
 
     end
@@ -46,8 +49,10 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
 
         docmeer.render_index
+        docmeer.render_css
 
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
 
     end
 
@@ -65,8 +70,10 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
 
         docmeer.render_index
+        docmeer.render_css
 
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
     def test_integration_CLI_defualt
@@ -84,6 +91,24 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
 
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
+    end
+
+    def test_integration_CLI_defualt_style
+        input = ['--style', '/test/dirTest/testStyle.erb']
+
+        DocmeCLI.start(input)
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub3Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/subsubDirectory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/dirTest.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
     def test_integration_CLI_parse
@@ -101,13 +126,31 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
 
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
+    end
+
+    def test_integration_CLI_parse_style
+        path = Dir.pwd
+        input = ['parse', path, '--style', '/test/dirTest/testStyle.erb']
+
+        DocmeCLI.start(input)
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub3Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/subsubDirectory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/dirTest.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
     def test_integration_CLI_clean_default
 
         docmeer = Docme.new('test/')
-        docmeer.scan_docs
-        docmeer.render_docs
+        docmeer.engage
 
         assert_equal true, Dir.exist?(Dir.pwd + '/docme_site')
 
@@ -126,13 +169,13 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
 
         assert_equal false, Dir.exists?(File.join(File.dirname(__FILE__), '../../docme_site'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
     def test_integration_CLI_clean_path
 
         docmeer = Docme.new('test/')
-        docmeer.scan_docs
-        docmeer.render_docs
+        docmeer.engage
 
         assert_equal true, Dir.exist?(Dir.pwd + '/docme_site')
 
@@ -150,6 +193,7 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
 
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
 
         assert_equal false, Dir.exists?(File.join(File.dirname(__FILE__), '../../docme_site'))
     end
