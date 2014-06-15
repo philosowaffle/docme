@@ -9,17 +9,14 @@ require 'thor'
 class DocmeCLI < Thor
     class_option :v, type: :boolean
 
-    desc 'default', 'When no commands are provided docme will begin the current directory and parse through all eligible folders and files.'
+    desc 'default', '`docme` When no commands are provided docme will begin the current directory and parse through all eligible folders and files.'
+    option :style, type: :string
     def default
         path = Dir.pwd
-        puts path
-
         puts "\n  ***Begining docme magix***"
 
-        docmeer = Docme.new(path, options[:v])
-        docmeer.scan_docs
-        docmeer.render_docs
-        docmeer.render_index
+        docmeer = Docme.new(path, options[:v], options[:style])
+        docmeer.engage
 
         puts "\n  ***Finished docme magic!***"
         puts "\n  You can find your docs inside the `docme_site` folder. \n   Hint: look for index.html\n\n"
@@ -44,15 +41,22 @@ class DocmeCLI < Thor
     end
 
     desc 'parse', '`docme parse <path>` -- Either provide a path to a file or a path to a directory and docme will parse all valid files found.'
+    long_desc <<-LONGDESC
+    `docme parse <path/to/file>` will parse a single file specified
+
+    `docme parse <path/to/folder>` will parse all eligible files in the specified directory
+
+    `docme parse <path/to/folder> --style <path/to/css.erb>` will use your own custom styling options.  This file must contain valid css and be saved as `.erb` file.
+
+    Use the `-v` flag on any command to recieve verbose output.
+    LONGDESC
+    option :style, type: :string
     def parse(path)
-        puts path
 
         puts "\n  ***Begining docme magix***"
 
-        docmeer = Docme.new(path, options[:v])
-        docmeer.scan_docs
-        docmeer.render_docs
-        docmeer.render_index
+        docmeer = Docme.new(path, options[:v], options[:style])
+        docmeer.engage
 
         puts "\n  ***Finished docme magic!***"
         puts "\n  You can find your docs inside the `docme_site` folder. \n   Hint: look for index.html\n\n"
