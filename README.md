@@ -23,7 +23,7 @@ Install the gem from [RubyGem](https://rubygems.org/gems/docme)
 
     OR
 
-    > docme <path/to/directory/>
+    > docme parse <path/to/directory/>
 
 Currently docme will begin in the directory provided and parse through all nested directories ignoring hidden files.  If you only give docme a single file then it will simply parse that one file.  docme prefers UTF-8 encoded files.
 
