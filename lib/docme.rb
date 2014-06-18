@@ -30,10 +30,13 @@ class Docme
 
     def make_home
         # create the directory where the site will be stored
-        return true if File.directory?('docme_site')
-        puts "+ Setting up docme's living arrangements." if @is_verbose
-        Dir.mkdir('docme_site')
-        puts ' - Woohoo! docme has a home!' if @is_verbose
+        if Dir.exist?('docme_site')
+            clean_directory('docme_site', @is_verbose)
+        else
+            puts "+ Setting up docme's living arrangements." if @is_verbose
+            Dir.mkdir('docme_site')
+            puts ' - Woohoo! docme has a home!' if @is_verbose
+        end
     end
 
     def scan_docs
