@@ -76,6 +76,38 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
+    def test_integration_test_recreates_home_if_exists
+        docmeer = Docme.new('test/')
+        docmeer.engage
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub3Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/subsubDirectory.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/dirTest.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
+
+        # now only scan one file
+        docmeer = Docme.new('test/dirTest/testJS.js')
+        docmeer.engage
+
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub3Directory.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/subsubDirectory.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/dirTest.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
+
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
+    end
+
     def test_integration_CLI_defualt
 
         input = []
