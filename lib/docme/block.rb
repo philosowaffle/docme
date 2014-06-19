@@ -31,7 +31,7 @@ class Block
             if strip_line.rindex('+', 0) == 0
 
                 is_docme = 1
-                parts = strip_line.split(':')
+                parts = strip_line.split(':', 2)
 
                 # parts[0] == the attribute name
                 attribute = clean_attribute(parts[0])
