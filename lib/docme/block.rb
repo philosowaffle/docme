@@ -33,6 +33,11 @@ class Block
                 is_docme = 1
                 parts = strip_line.split(':', 2)
 
+                if parts[0].nil? || parts[1].nil?
+                    is_docme = 0
+                    next
+                end
+
                 # parts[0] == the attribute name
                 attribute = clean_attribute(parts[0])
 

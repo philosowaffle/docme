@@ -27,7 +27,7 @@ MethodLength:
   Enabled: false
 
 CyclomaticComplexity:
-  Max: 12
+  Max: 14
 
 Style/Next:
   Enabled: false
