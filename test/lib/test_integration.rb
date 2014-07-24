@@ -29,7 +29,7 @@ class IntegrationTest < MiniTest::Unit::TestCase
         docmeer.render_index
         docmeer.render_css
 
-        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
 
 
@@ -47,11 +47,12 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
 
         docmeer.render_index
         docmeer.render_css
 
-        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
 
     end
@@ -72,7 +73,7 @@ class IntegrationTest < MiniTest::Unit::TestCase
         docmeer.render_index
         docmeer.render_css
 
-        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
@@ -87,8 +88,9 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
-
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
 
         # now only scan one file
@@ -104,7 +106,7 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
 
 
-        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
@@ -121,8 +123,9 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
-
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
@@ -138,8 +141,9 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
-
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
@@ -155,8 +159,9 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
-
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
@@ -172,8 +177,9 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
-
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
@@ -190,8 +196,9 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
-
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
@@ -208,8 +215,9 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
-
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
@@ -226,8 +234,9 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
-
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
@@ -244,8 +253,9 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
-
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
@@ -262,8 +272,9 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
-
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
     end
 
@@ -285,8 +296,9 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
-
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
 
         assert_equal false, Dir.exists?(File.join(File.dirname(__FILE__), '../../docme_site'))
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
@@ -311,8 +323,9 @@ class IntegrationTest < MiniTest::Unit::TestCase
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/test.html'))
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testJS.html'))
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/testTextFile.html'))
-
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+
+        assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
         assert_equal false, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/style.css'))
 
         assert_equal false, Dir.exists?(File.join(File.dirname(__FILE__), '../../docme_site'))

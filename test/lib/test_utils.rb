@@ -96,7 +96,7 @@ class UtilsTest < MiniTest::Unit::TestCase
         assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/sub4Directory.html'))
         docmeer.render_index
 
-        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/index.html'))
+        assert_equal true, File.exists?(File.join(File.dirname(__FILE__), '../../docme_site/site_index.html'))
 
         clean_directory(Dir.pwd + '/docme_site')
 

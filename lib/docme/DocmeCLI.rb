@@ -21,7 +21,7 @@ class DocmeCLI < Thor
         docmeer.engage
 
         puts "\n  ***Finished docme magic!***"
-        puts "\n  You can find your docs inside the `docme_site` folder. \n   Hint: look for index.html\n\n"
+        puts "\n  You can find your docs inside the `docme_site` folder. \n   Hint: look for site_index.html\n\n"
 
     end
 
