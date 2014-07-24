@@ -75,12 +75,12 @@ class Docme
 
         renderer = ERB.new(template)
 
-        File.open('index.html', 'w+') do |f|
+        File.open('site_index.html', 'w+') do |f|
             f.write(renderer.result(binding))
         end
 
         # add page to docme dir
-        FileUtils.mv('index.html', 'docme_site/index.html')
+        FileUtils.mv('site_index.html', 'docme_site/site_index.html')
 
         puts '+ index created' if @is_verbose
     end
