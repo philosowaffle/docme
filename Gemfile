@@ -9,5 +9,5 @@ gem "ruby-progressbar", '1.5.1', require: false
 
 group :test do
     gem 'rake'
-    gem "rubocop", '0.23.0'
+    gem "rubocop", '0.24.1'
 end
