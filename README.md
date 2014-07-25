@@ -77,7 +77,7 @@ You should either run clean from a directory that contains a `docme_site` folder
 
  To recieve verbose output use the `-v` flag.
 
- You can also provide your own style files.  You may specify your own CSS file, index layout, and page layout.  Simply supply the files with the below flags.  Syntax examples [here](https://github.com/philosowaffle/docme/wiki/Docme-Syntax-v2.0.0).
+ You can also provide your own style files.  You may specify your own CSS file, index layout, and page layout.  Simply supply the files with the below flags.  Syntax examples [here](https://github.com/philosowaffle/docme/wiki/Docme-Syntax-v2.0.1).
 
     > docme --index <path/to/index.erb> --page <path/to/page.erb> --style <path/to/style.erb>
 
