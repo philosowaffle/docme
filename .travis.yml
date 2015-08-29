@@ -6,3 +6,4 @@ branches:
     - master
 script:
   - bundle exec rake
+sudo: false
