@@ -5,44 +5,45 @@ require 'docme'
 require 'docme/utils'
 require 'fileutils'
 require 'thor'
+require 'rainbow/ext/string'
 
 class DocmeCLI < Thor
     class_option :v, type: :boolean
 
-    desc 'default', '`docme` When no commands are provided docme will begin the current directory and parse through all eligible folders and files.'
+    desc 'default', 'docme'.color(:blue) + ' : When no commands are provided docme will begin the current directory and parse through all eligible folders and files.'
     option :style, type: :string
     option :index, type: :string
     option :page, type: :string
     def default
         path = Dir.pwd
-        puts "\n  ***Begining docme magix***"
+        puts "\n  ***Begining docme magix***".color(:green)
 
         docmeer = Docme.new(path, options[:v], options[:style], options[:index], options[:page])
         docmeer.engage
 
-        puts "\n  ***Finished docme magic!***"
-        puts "\n  You can find your docs inside the `docme_site` folder. \n   Hint: look for site_index.html\n\n"
+        puts "\n  ***Finished docme magic!***".color(:green)
+        puts "\n  You can find your docs inside the `docme_site` folder. \n   Hint: look for site_index.html\n\n".color(:green)
 
     end
 
-    desc 'clean', '`docme clean <path>` Attemtps to empty and remove the docme_site directory.  Path is optional and should point to a directory containing a `docme_site` folder. If an error is returned then you will have to delete the folder manually.'
+    desc 'clean', 'docme clean <path>'.color(:blue) + ' : Attemtps to empty and remove the docme_site directory.  Path is optional and should point to a directory containing a `docme_site` folder. If an error is returned then you will have to delete the folder manually.'
     def clean(path = nil)
         path = Dir.pwd if path.nil?
 
-        fail 'Please provide a valid path to a directory that contains a `docme_site` folder.' unless Dir.exist?(path + '/docme_site')
+        fail 'Please provide a valid path to a directory that contains a `docme_site` folder.'.color(:red) unless Dir.exist?(path + '/docme_site')
 
-        puts '+ docme will clean ' + path if options[:v]
-        puts '+ docme cleaning' if options[:v]
+        puts '+ docme will clean '.color(:cyan) + path if options[:v]
+        puts '+ docme cleaning'.color(:cyan) if options[:v]
 
         clean_directory(path + '/docme_site', options[:v])
         Dir.rmdir(path + '/docme_site') if Dir.exist?(path + '/docme_site')
 
-        puts '+ docme_site removed' if options[:v]
-        puts '+ docme is now homeless' if options[:v]
+        puts '+ docme_site removed'.color(:cyan) if options[:v]
+        puts '+ docme is now homeless'.color(:cyan) if options[:v]
 
     end
 
-    desc 'parse', '`docme parse <path>` -- Either provide a path to a file or a path to a directory and docme will parse all valid files found.'
+    desc 'parse', 'docme parse <path>'.color(:blue) + ' -- Either provide a path to a file or a path to a directory and docme will parse all valid files found.'
     long_desc <<-LONGDESC
     `docme parse <path/to/file>` will parse a single file specified
 
@@ -61,13 +62,13 @@ class DocmeCLI < Thor
     option :page, type: :string
     def parse(path)
 
-        puts "\n  ***Begining docme magix***"
+        puts "\n  ***Begining docme magix***".color(:green)
 
         docmeer = Docme.new(path, options[:v], options[:style], options[:index], options[:page])
         docmeer.engage
 
-        puts "\n  ***Finished docme magic!***"
-        puts "\n  You can find your docs inside the `docme_site` folder. \n   Hint: look for index.html\n\n"
+        puts "\n  ***Finished docme magic!***".color(:green)
+        puts "\n  You can find your docs inside the `docme_site` folder. \n   Hint: look for index.html\n\n".color(:green)
 
     end
 
