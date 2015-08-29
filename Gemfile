@@ -5,6 +5,7 @@ gemspec
 gem "coveralls", require: false
 gem "json", '1.8.3', require: false
 gem "ruby-progressbar", '1.7.5', require: false
+gem "rainbow", '2.0.0', require:false
 
 
 group :test do
