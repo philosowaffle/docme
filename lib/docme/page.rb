@@ -19,14 +19,14 @@ class Page
         @name = clean_filename(file)
         @source_file = File.open(file).read
         @page_erb = '../templates/page.erb'
-        @blocks  = []
+        @blocks = []
         @is_empty = true
     end
 
     def parse_blocks
         block = []
 
-        @source_file.each_line  do |line|
+        @source_file.each_line do |line|
             strip_line = line.lstrip
 
             # if this is the begining of a comment block then start a new function doc
