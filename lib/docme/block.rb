@@ -94,7 +94,6 @@ class Block
                 block_content = {}
                 next
             end
-
         end
 
         @is_empty = @attributes.empty?

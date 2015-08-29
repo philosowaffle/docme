@@ -57,8 +57,7 @@ def parse_directory(path, is_verbose = nil)
 
     # for each file in the sub directory
     Dir.foreach(path) do |f|
-
-        next if f == '.' || f == '..' || f.rindex('.', 0) || unsupported_encoding(f) ||  unsupported_extension(f)
+        next if f == '.' || f == '..' || f.rindex('.', 0) || unsupported_encoding(f) || unsupported_extension(f)
 
         # if another directory then go inside
         if File.directory?(path + '/' + f)
@@ -80,26 +79,23 @@ def parse_directory(path, is_verbose = nil)
 end
 
 def parse_file(file, is_verbose = nil)
+    return unless File.file?(file)
+    return unless File.exist?(file)
+    return if file.rindex('.', 0)
+    return if unsupported_encoding(file)
+    return if unsupported_extension(file)
 
-    if File.file?(file) && File.exist?(file) && !file.rindex('.', 0) && !unsupported_encoding(file) && !unsupported_extension(file)
+    puts ' - docme parsing page: ' + file if is_verbose
 
-        puts ' - docme parsing page: ' + file if is_verbose
-
-        page = Page.new(file)
-        page.parse_blocks
-
-        page
-
-    else
-        nil
-    end
+    page = Page.new(file)
+    page.parse_blocks
+    page
 
 end
 
 def clean_directory(path, is_verbose = nil)
     # for each file in the directory
     Dir.foreach(path) do |f|
-
         next if f == '.' || f == '..'
 
         # if another directory then go inside

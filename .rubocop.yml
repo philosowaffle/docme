@@ -14,7 +14,10 @@ AllCops:
 Documentation:
   Enabled: false
 
-EmptyLinesAroundBody:
+EmptyLinesAroundClassBody:
+  Enabled: false
+
+EmptyLinesAroundMethodBody:
   Enabled: false
 
 IndentationWidth:
@@ -26,14 +29,17 @@ LineLength:
 MethodLength:
   Enabled: false
 
+AbcSize:
+  Max: 48
+
 CyclomaticComplexity:
   Max: 14
+
+PerceivedComplexity:
+  Max: 15
 
 Style/Next:
   Enabled: false
 
 Style/LeadingCommentSpace:
   Enabled: false
-
-# Style/ClassLength:
-#   Max: 134
