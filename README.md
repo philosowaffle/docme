@@ -3,7 +3,9 @@ docme
 
 A documentation parser.
 
-[![Gem Version](https://badge.fury.io/rb/docme.svg)](http://badge.fury.io/rb/docme) [![Build Status](https://travis-ci.org/philosowaffle/docme.svg?branch=master)](https://travis-ci.org/philosowaffle/docme) [![Coverage Status](https://coveralls.io/repos/philosowaffle/docme/badge.png)](https://coveralls.io/r/philosowaffle/docme) [![Dependency Status](https://gemnasium.com/philosowaffle/docme.svg)](https://gemnasium.com/philosowaffle/docme)
+[![Gem Version](https://badge.fury.io/rb/docme.svg)](http://badge.fury.io/rb/docme) [![Build Status](https://travis-ci.org/philosowaffle/docme.svg?branch=master)](https://travis-ci.org/philosowaffle/docme) [![Coverage Status](https://coveralls.io/repos/philosowaffle/docme/badge.png)](https://coveralls.io/r/philosowaffle/docme) 
+
+<a href="https://www.buymeacoffee.com/philosowaffle" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/black_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 ###Description
 
